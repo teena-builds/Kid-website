@@ -7,6 +7,7 @@ import { Minus, Plus } from "lucide-react";
 import { faqSection } from "@/data/home-data";
 import { Reveal } from "@/components/ui/reveal";
 import { AboutArtCanvas } from "./about-art-canvas";
+import { FloatingScribble } from "./floating-scribble";
 
 export function PromoSection() {
   const [openIndex, setOpenIndex] = useState(0);
@@ -14,7 +15,7 @@ export function PromoSection() {
   return (
     <section
       id="learning-highlights"
-      className="scroll-mt-32 bg-[#f3f3f3] py-20 lg:py-28"
+      className="scroll-mt-32 bg-white py-20 lg:py-28"
       aria-label="Frequently asked questions"
     >
       <span id="promo" className="block scroll-mt-32" aria-hidden="true" />
@@ -96,9 +97,9 @@ export function PromoSection() {
                 className="object-cover"
               />
             </div>
-            <div className="absolute -bottom-11 right-4 h-24 w-44">
+            <FloatingScribble className="pointer-events-none absolute -bottom-11 right-4 h-24 w-44">
               <AboutArtCanvas variant="scribble" className="h-full w-full" />
-            </div>
+            </FloatingScribble>
           </div>
         </Reveal>
       </div>

@@ -71,6 +71,10 @@ select {
   animation: banner-wave-fast 5s linear infinite;
 }
 
+.footer-top-wave {
+  animation: footer-top-wave 14s linear infinite;
+}
+
 @keyframes banner-wave-slow {
   0% {
     transform: translateX(0);
@@ -89,9 +93,19 @@ select {
   }
 }
 
+@keyframes footer-top-wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .banner-wave-slow,
-  .banner-wave-fast {
+  .banner-wave-fast,
+  .footer-top-wave {
     animation: none !important;
   }
 

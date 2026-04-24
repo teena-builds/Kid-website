@@ -84,7 +84,7 @@ function PlayGroupSections() {
   return (
     <>
       <IntroSplit
-        image="https://images.pexels.com/photos/8613021/pexels-photo-8613021.jpeg?auto=compress&cs=tinysrgb&w=1400"
+        image="https://images.pexels.com/photos/8613100/pexels-photo-8613100.jpeg?auto=compress&cs=tinysrgb&w=1400"
         imageAlt="Toddlers enjoying play group activities"
         title="A joyful first school experience"
         description="Our Play Group is thoughtfully designed for toddlers who are beginning their social and learning journey. Every session balances comfort, curiosity, and guided play."
@@ -152,7 +152,7 @@ function NurserySections() {
   return (
     <>
       <IntroSplit
-        image="https://images.pexels.com/photos/8423024/pexels-photo-8423024.jpeg?auto=compress&cs=tinysrgb&w=1400"
+        image="https://images.pexels.com/photos/8471833/pexels-photo-8471833.jpeg?auto=compress&cs=tinysrgb&w=1400"
         imageAlt="Nursery children in guided classroom session"
         title="Building strong foundations"
         description="Nursery Program introduces structured learning while keeping joy at the center. Children build confidence through language, numbers, creativity, and interaction."
@@ -298,7 +298,7 @@ function SeniorKgSections() {
   return (
     <>
       <IntroSplit
-        image="https://images.pexels.com/photos/8423026/pexels-photo-8423026.jpeg?auto=compress&cs=tinysrgb&w=1400"
+        image="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=1400"
         imageAlt="Senior KG students working on learning tasks"
         title="Ready for the next school step"
         description="Senior KG prepares children for primary school through structured academics, social confidence building, and clear progress tracking."

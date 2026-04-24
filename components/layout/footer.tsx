@@ -10,11 +10,13 @@ import {
   Youtube
 } from "lucide-react";
 import { footerContact, footerLinks } from "@/data/home-data";
+import { FooterTopWave } from "@/components/shared/footer-top-wave";
 
 export function Footer() {
   return (
-    <footer id="footer" className="relative overflow-hidden pt-20">
-      <div className="absolute inset-0 bg-[linear-gradient(100.88deg,#EBFFFE_0.6%,#FFF6EB)] -rotate-180" />
+    <footer id="footer" className="relative overflow-hidden bg-white pt-44 sm:pt-52 lg:pt-60">
+      <div className="absolute inset-0 bg-[#fdebd5] -rotate-180" />
+      <FooterTopWave />
 
       <div className="relative mx-auto max-w-7xl px-6 pb-10 lg:px-8">
         {/* Floating newsletter card to create the premium layered footer composition. */}

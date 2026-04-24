@@ -51,8 +51,8 @@ export function MegaMenu({ panelId, onClose, className = "" }: MegaMenuProps) {
 
         <article className="relative min-h-72 overflow-hidden rounded-3xl bg-gradient-to-br from-[#f8c259] via-[#f7a35b] to-[#ef7f6d] p-6 text-white shadow-soft">
           <Image
-            src="https://images.pexels.com/photos/8613267/pexels-photo-8613267.jpeg?auto=compress&cs=tinysrgb&w=900"
-            alt="Children playing in a colorful classroom"
+            src="https://images.pexels.com/photos/8613111/pexels-photo-8613111.jpeg?auto=compress&cs=tinysrgb&w=900"
+            alt="Children learning numbers in a classroom"
             fill
             sizes="(max-width: 1024px) 100vw, 360px"
             className="object-cover opacity-35"

@@ -19,9 +19,9 @@ export const heroSlides = [
       "A warm and trusted place where little learners grow through guided activities, gentle care, and joyful classrooms.",
     primaryCta: { label: "Admission Open 22-23", href: "#programs" },
     image:
-      "https://images.pexels.com/photos/8613267/pexels-photo-8613267.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    imageAlt: "Happy children playing with colorful toys",
-    bgClass: "from-[#fffaf1] to-[#e9f8f7]"
+      "https://images.pexels.com/photos/8613100/pexels-photo-8613100.jpeg?auto=compress&cs=tinysrgb&w=2200",
+    imageAlt: "Children learning together in a kindergarten classroom",
+    bgClass: "from-[#fffaf1] to-[#c7e9e7]"
   },
   {
     id: "creative-learning",
@@ -45,7 +45,7 @@ export const heroSlides = [
     image:
       "https://images.pexels.com/photos/8471887/pexels-photo-8471887.jpeg?auto=compress&cs=tinysrgb&w=1400",
     imageAlt: "Children learning and smiling together",
-    bgClass: "from-[#ebfdfb] to-[#fff8ef]"
+    bgClass: "from-[#ebfdfb] to-[#ffefdc]"
   }
 ];
 
@@ -243,7 +243,7 @@ export const testimonials = [
     quote:
       "The staff is warm, the spaces are beautiful, and my daughter looks forward to every single day.",
     avatar:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400"
+      "https://images.pexels.com/photos/8612998/pexels-photo-8612998.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     name: "Liam Brooks",
@@ -251,7 +251,7 @@ export const testimonials = [
     quote:
       "Their event planning and class quality are top-notch. It feels premium yet genuinely caring.",
     avatar:
-      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400"
+      "https://images.pexels.com/photos/8471709/pexels-photo-8471709.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
     name: "Mia Henderson",
@@ -259,7 +259,7 @@ export const testimonials = [
     quote:
       "KidNest blends safety, fun, and early learning perfectly. We trust the team completely.",
     avatar:
-      "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=400"
+      "https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=600"
   }
 ];
 

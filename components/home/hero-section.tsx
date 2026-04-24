@@ -10,10 +10,10 @@ import { heroSlides } from "@/data/home-data";
 type SlideDirection = 1 | -1;
 
 const FLOAT_TRANSITIONS = [
-  { duration: 4.8, delay: 0, y: [0, -8, 0], x: [0, 1, 0] },
-  { duration: 3.9, delay: 0.25, y: [0, -10, 0], x: [0, -1, 0] },
-  { duration: 5.2, delay: 0.1, y: [0, -6, 0], x: [0, 1, 0] },
-  { duration: 4.3, delay: 0.45, y: [0, -9, 0], x: [0, -1, 0] }
+  { duration: 2.8, y: [0, -8, 0], x: [0, 12, 0] },
+  { duration: 2.9, y: [0, -10, 0], x: [0, -10, 0] },
+  { duration: 2.7, y: [0, -6, 0], x: [0, 11, 0] },
+  { duration: 3.0, y: [0, -9, 0], x: [0, -9, 0] }
 ];
 
 export function HeroSection() {
@@ -52,6 +52,36 @@ export function HeroSection() {
     [reducedMotion]
   );
 
+  const textContainerVariants = useMemo(
+    () => ({
+      hidden: {},
+      show: {
+        transition: reducedMotion
+          ? { staggerChildren: 0.03, delayChildren: 0 }
+          : { staggerChildren: 0.06, delayChildren: 0 }
+      }
+    }),
+    [reducedMotion]
+  );
+
+  const textItemVariants = useMemo(
+    () => ({
+      hidden: {
+        opacity: 0,
+        y: reducedMotion ? 0 : 14
+      },
+      show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: reducedMotion ? 0.16 : 0.34,
+          ease: "easeOut" as const
+        }
+      }
+    }),
+    [reducedMotion]
+  );
+
   return (
     <section
       role="region"
@@ -86,53 +116,69 @@ export function HeroSection() {
             >
               <div className="mx-auto grid min-h-[78svh] max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-[1fr_1.02fr] lg:gap-14 lg:px-8">
                 <div className="max-w-xl">
-                  <motion.p
-                    initial={false}
-                    animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                    transition={{ duration: 0.28, delay: isActive ? 0.02 : 0 }}
-                    className="text-lg font-semibold text-brand-teal"
-                  >
-                    {slide.tag}
-                  </motion.p>
-
-                  <motion.h1
-                    initial={false}
-                    animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-                    transition={{ duration: 0.35, delay: isActive ? 0.06 : 0 }}
-                    className="mt-4 font-[var(--font-display)] text-6xl font-bold leading-[0.98] tracking-tight text-[#17191d] sm:text-7xl lg:text-8xl"
-                  >
-                    {slide.heading}
-                  </motion.h1>
-
-                  <motion.p
-                    initial={false}
-                    animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                    transition={{ duration: 0.3, delay: isActive ? 0.1 : 0 }}
-                    className="mt-6 max-w-lg text-lg leading-relaxed text-slate-600"
-                  >
-                    {slide.description}
-                  </motion.p>
-
-                  <motion.div
-                    initial={false}
-                    animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-                    transition={{ duration: 0.26, delay: isActive ? 0.14 : 0 }}
-                    className="mt-9"
-                  >
-                    <Link
-                      href={slide.primaryCta.href}
-                      tabIndex={isActive ? 0 : -1}
-                      className="inline-flex rounded-full bg-[#f79a1e] px-9 py-4 text-base font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ee8f14] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink"
+                  {isActive ? (
+                    <motion.div
+                      key={`hero-text-${slideIndex}`}
+                      initial="hidden"
+                      animate="show"
+                      variants={textContainerVariants}
                     >
-                      {slide.primaryCta.label}
-                    </Link>
-                  </motion.div>
+                      <motion.p
+                        variants={textItemVariants}
+                        className="text-lg font-semibold text-brand-teal"
+                      >
+                        {slide.tag}
+                      </motion.p>
+
+                      <motion.h1
+                        variants={textItemVariants}
+                        className="mt-4 font-[var(--font-display)] text-6xl font-bold leading-[0.98] tracking-tight text-[#17191d] sm:text-7xl lg:text-8xl"
+                      >
+                        {slide.heading}
+                      </motion.h1>
+
+                      <motion.p
+                        variants={textItemVariants}
+                        className="mt-6 max-w-lg text-lg leading-relaxed text-slate-600"
+                      >
+                        {slide.description}
+                      </motion.p>
+
+                      <motion.div variants={textItemVariants} className="mt-9">
+                        <Link
+                          href={slide.primaryCta.href}
+                          className="inline-flex rounded-full bg-[#f79a1e] px-9 py-4 text-base font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ee8f14] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink"
+                        >
+                          {slide.primaryCta.label}
+                        </Link>
+                      </motion.div>
+                    </motion.div>
+                  ) : (
+                    <div aria-hidden="true" className="opacity-0">
+                      <p className="text-lg font-semibold text-brand-teal">{slide.tag}</p>
+                      <h1 className="mt-4 font-[var(--font-display)] text-6xl font-bold leading-[0.98] tracking-tight text-[#17191d] sm:text-7xl lg:text-8xl">
+                        {slide.heading}
+                      </h1>
+                      <p className="mt-6 max-w-lg text-lg leading-relaxed text-slate-600">
+                        {slide.description}
+                      </p>
+                      <div className="mt-9">
+                        <Link
+                          href={slide.primaryCta.href}
+                          tabIndex={-1}
+                          className="inline-flex rounded-full bg-[#f79a1e] px-9 py-4 text-base font-semibold text-white shadow-soft transition-all duration-300"
+                        >
+                          {slide.primaryCta.label}
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <motion.div
                   initial={false}
                   animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                  transition={{ duration: 0.34, delay: isActive ? 0.08 : 0 }}
+                  transition={{ duration: 0.2, delay: 0 }}
                   className="relative mx-auto w-full max-w-[620px] pb-2"
                 >
                   <div className="relative aspect-[1.05/0.95] w-full overflow-hidden bg-white/40 shadow-soft [clip-path:polygon(16%_8%,46%_0%,66%_8%,92%_30%,100%_56%,88%_86%,58%_100%,26%_96%,8%_78%,0%_50%,6%_22%)]">
@@ -140,7 +186,7 @@ export function HeroSection() {
                       src={slide.image}
                       alt={slide.imageAlt}
                       fill
-                      quality={78}
+                      quality={92}
                       priority={idx < 2}
                       loading={idx < 2 ? "eager" : "lazy"}
                       sizes="(max-width: 1024px) 90vw, 620px"
@@ -151,18 +197,13 @@ export function HeroSection() {
                   <motion.span
                     aria-hidden="true"
                     animate={
-                      reducedMotion || !isActive
-                        ? { y: 0, x: 0, opacity: isActive ? 1 : 0 }
-                        : {
-                            y: FLOAT_TRANSITIONS[0].y,
-                            x: FLOAT_TRANSITIONS[0].x,
-                            opacity: 1
-                          }
+                      reducedMotion
+                        ? { y: 0, x: 0 }
+                        : { y: FLOAT_TRANSITIONS[0].y, x: FLOAT_TRANSITIONS[0].x }
                     }
                     transition={{
                       duration: FLOAT_TRANSITIONS[0].duration,
-                      delay: FLOAT_TRANSITIONS[0].delay,
-                      repeat: reducedMotion || !isActive ? 0 : Infinity,
+                      repeat: reducedMotion ? 0 : Infinity,
                       ease: "easeInOut"
                     }}
                     className="absolute -left-4 top-16 h-16 w-16 rounded-full border-4 border-brand-teal/35"
@@ -170,18 +211,13 @@ export function HeroSection() {
                   <motion.span
                     aria-hidden="true"
                     animate={
-                      reducedMotion || !isActive
-                        ? { y: 0, x: 0, opacity: isActive ? 1 : 0 }
-                        : {
-                            y: FLOAT_TRANSITIONS[1].y,
-                            x: FLOAT_TRANSITIONS[1].x,
-                            opacity: 1
-                          }
+                      reducedMotion
+                        ? { y: 0, x: 0 }
+                        : { y: FLOAT_TRANSITIONS[1].y, x: FLOAT_TRANSITIONS[1].x }
                     }
                     transition={{
                       duration: FLOAT_TRANSITIONS[1].duration,
-                      delay: FLOAT_TRANSITIONS[1].delay,
-                      repeat: reducedMotion || !isActive ? 0 : Infinity,
+                      repeat: reducedMotion ? 0 : Infinity,
                       ease: "easeInOut"
                     }}
                     className="absolute -right-6 top-10 h-14 w-14 rounded-full border-4 border-brand-mustard/40"
@@ -189,18 +225,13 @@ export function HeroSection() {
                   <motion.span
                     aria-hidden="true"
                     animate={
-                      reducedMotion || !isActive
-                        ? { y: 0, x: 0, opacity: isActive ? 1 : 0 }
-                        : {
-                            y: FLOAT_TRANSITIONS[2].y,
-                            x: FLOAT_TRANSITIONS[2].x,
-                            opacity: 1
-                          }
+                      reducedMotion
+                        ? { y: 0, x: 0 }
+                        : { y: FLOAT_TRANSITIONS[2].y, x: FLOAT_TRANSITIONS[2].x }
                     }
                     transition={{
                       duration: FLOAT_TRANSITIONS[2].duration,
-                      delay: FLOAT_TRANSITIONS[2].delay,
-                      repeat: reducedMotion || !isActive ? 0 : Infinity,
+                      repeat: reducedMotion ? 0 : Infinity,
                       ease: "easeInOut"
                     }}
                     className="absolute -bottom-5 left-[8%] h-10 w-10 rounded-full border-4 border-brand-coral/35"
@@ -208,18 +239,13 @@ export function HeroSection() {
                   <motion.span
                     aria-hidden="true"
                     animate={
-                      reducedMotion || !isActive
-                        ? { y: 0, x: 0, opacity: isActive ? 1 : 0 }
-                        : {
-                            y: FLOAT_TRANSITIONS[3].y,
-                            x: FLOAT_TRANSITIONS[3].x,
-                            opacity: 1
-                          }
+                      reducedMotion
+                        ? { y: 0, x: 0 }
+                        : { y: FLOAT_TRANSITIONS[3].y, x: FLOAT_TRANSITIONS[3].x }
                     }
                     transition={{
                       duration: FLOAT_TRANSITIONS[3].duration,
-                      delay: FLOAT_TRANSITIONS[3].delay,
-                      repeat: reducedMotion || !isActive ? 0 : Infinity,
+                      repeat: reducedMotion ? 0 : Infinity,
                       ease: "easeInOut"
                     }}
                     className="absolute bottom-2 right-8 h-12 w-12 rounded-full border-4 border-brand-mustard/40"
@@ -229,13 +255,13 @@ export function HeroSection() {
                     viewBox="0 0 88 42"
                     className="absolute right-1/2 top-1 h-10 w-20 translate-x-16 text-[#ef8f16]"
                     animate={
-                      reducedMotion || !isActive
-                        ? { y: 0, opacity: isActive ? 1 : 0 }
-                        : { y: [0, -7, 0], opacity: 1 }
+                      reducedMotion
+                        ? { y: 0 }
+                        : { y: [0, -7, 0], x: [0, 8, 0] }
                     }
                     transition={{
-                      duration: 4.6,
-                      repeat: reducedMotion || !isActive ? 0 : Infinity,
+                      duration: 2.8,
+                      repeat: reducedMotion ? 0 : Infinity,
                       ease: "easeInOut"
                     }}
                     fill="none"
@@ -247,6 +273,42 @@ export function HeroSection() {
                       strokeLinecap="round"
                     />
                   </motion.svg>
+
+                  <motion.div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -bottom-6 left-1/2 h-auto w-32 -translate-x-1/2"
+                    animate={
+                      reducedMotion
+                        ? { x: 0, y: 0 }
+                        : { x: [0, 12, 0], y: [0, -8, 0] }
+                    }
+                    transition={{
+                      duration: 2.8,
+                      ease: "easeInOut",
+                      repeat: reducedMotion ? 0 : Infinity
+                    }}
+                  >
+                    <svg viewBox="0 0 140 54" className="h-auto w-full" fill="none">
+                      <path
+                        d="M7 16c19-13 37 2 56-7 12-6 18-17 28-9"
+                        stroke="#23b9b3"
+                        strokeWidth="3.5"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M6 30c25-10 47 6 73-4 17-6 26-18 39-11"
+                        stroke="#23b9b3"
+                        strokeWidth="3.5"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M8 45c22-14 43-1 64-8 16-6 27-20 46-12"
+                        stroke="#23b9b3"
+                        strokeWidth="3.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </motion.div>
                 </motion.div>
               </div>
             </motion.article>

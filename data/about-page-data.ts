@@ -61,22 +61,22 @@ export const teachers = [
     name: "Ava Thompson",
     role: "Senior Teacher",
     image:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlt: "Portrait of teacher Ava Thompson"
+      "https://images.pexels.com/photos/8613100/pexels-photo-8613100.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Teacher helping children with classroom activities"
   },
   {
     name: "Daniel Reed",
     role: "Activity Mentor",
     image:
-      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlt: "Portrait of teacher Daniel Reed"
+      "https://images.pexels.com/photos/8471833/pexels-photo-8471833.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Children in an art-focused classroom session"
   },
   {
     name: "Mia Collins",
     role: "Early Years Teacher",
     image:
-      "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlt: "Portrait of teacher Mia Collins"
+      "https://images.pexels.com/photos/8613021/pexels-photo-8613021.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageAlt: "Kids and teacher learning together in class"
   }
 ];
 

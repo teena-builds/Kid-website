@@ -7,7 +7,7 @@ export function FeatureCards() {
   const featuredIndex = Math.floor(featureCards.length / 2);
 
   return (
-    <section className="mt-16 pb-20 lg:mt-20 lg:pb-24">
+    <section className="mt-16 bg-white pb-20 pt-20 lg:mt-20 lg:pb-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal className="mx-auto mb-10 max-w-3xl text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-coral">
@@ -22,7 +22,7 @@ export function FeatureCards() {
           </p>
         </Reveal>
 
-        <div className="grid gap-6 lg:grid-cols-3 lg:items-end">
+        <div className="grid gap-6 lg:grid-cols-3 lg:items-end mt-16">
           {featureCards.map((item, index) => {
             const isFeatured = index === featuredIndex;
 

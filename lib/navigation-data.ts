@@ -13,8 +13,8 @@ export const primaryNavItems = [
   { label: "About Us", href: "/about" },
   { label: "Programs", href: "#programs", menu: "programs" as const },
   { label: "Shop", href: "#shop", menu: "shop" as const },
-  { label: "Blog", href: "#blog" },
-  { label: "Contact Us", href: "#footer" }
+  { label: "Blog", href: "/news" },
+  { label: "Contact Us", href: "/contact" }
 ];
 
 export const programsMenu = [

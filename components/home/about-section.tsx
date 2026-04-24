@@ -4,6 +4,7 @@ import { ChevronRight, Play } from "lucide-react";
 import { aboutShowcase } from "@/data/home-data";
 import { Reveal } from "@/components/ui/reveal";
 import { AboutArtCanvas } from "./about-art-canvas";
+import { FloatingScribble } from "./floating-scribble";
 
 export function AboutSection() {
   return (
@@ -26,9 +27,9 @@ export function AboutSection() {
                 className="object-cover transition-transform duration-500 hover:scale-[1.02]"
               />
             </div>
-            <div className="absolute -bottom-11 right-2 h-24 w-44">
+            <FloatingScribble className="pointer-events-none absolute -bottom-11 right-2 h-24 w-44">
               <AboutArtCanvas variant="scribble" className="h-full w-full" />
-            </div>
+            </FloatingScribble>
           </div>
         </Reveal>
 
