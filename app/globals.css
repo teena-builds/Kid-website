@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #fffdf7;
+  --text: #263238;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display), "Fredoka", sans-serif;
+  font-weight: 300;
+}
+
+@layer base {
+  .font-\[var\(--font-display\)\] {
+    font-family: var(--font-display), "Fredoka", sans-serif !important;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display), "Fredoka", sans-serif;
+  font-weight: 600!important;
+}
+
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  font-family: var(--font-display), "Fredoka", sans-serif;
+  font-weight: 500 !important;
+}
+
+input,
+textarea,
+select {
+  font-family: var(--font-display), "Fredoka", sans-serif;
+  font-weight: 400;
+}
+
+.section-surface {
+  position: relative;
+}
+
+.section-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(246, 195, 81, 0.13), transparent 44%),
+    radial-gradient(circle at 86% 22%, rgba(136, 215, 181, 0.14), transparent 40%);
+}
+
+.banner-wave-slow {
+  animation: banner-wave-slow 8s linear infinite;
+}
+
+.banner-wave-fast {
+  animation: banner-wave-fast 5s linear infinite;
+}
+
+@keyframes banner-wave-slow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes banner-wave-fast {
+  0% {
+    transform: translateX(-20%);
+  }
+  100% {
+    transform: translateX(-70%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-wave-slow,
+  .banner-wave-fast {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
