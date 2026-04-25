@@ -30,7 +30,7 @@ export function InnerBanner({ banner }: InnerBannerProps) {
           <p className="rounded-full border border-white/35 bg-white/10 px-4 py-1 text-sm text-white/95">
             {banner.breadcrumb}
           </p>
-          <h1 className="mt-5 font-[var(--font-display)] text-5xl font-semibold text-white sm:text-6xl">
+          <h1 className="mt-5 text-5xl text-white sm:text-6xl">
             {banner.title}
           </h1>
         </div>

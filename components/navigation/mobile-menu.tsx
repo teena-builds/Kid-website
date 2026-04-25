@@ -55,7 +55,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             className="fixed right-0 top-0 z-[60] h-full w-[88vw] max-w-md overflow-y-auto bg-white p-6"
           >
             <div className="mb-7 flex items-center justify-between">
-              <p className="font-[var(--font-display)] text-2xl font-bold text-brand-ink">
+              <p className="text-2xl text-brand-ink">
                 KidNest Menu
               </p>
               <button
@@ -75,7 +75,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                       key={item.label}
                       href={item.href}
                       onClick={onClose}
-                      className="block rounded-2xl px-4 py-3 text-base font-normal text-brand-ink transition-colors hover:bg-brand-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
+                      className="block rounded-2xl px-4 py-3 text-base text-brand-ink transition-colors hover:bg-brand-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
                     >
                       {item.label}
                     </Link>
@@ -91,7 +91,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                         setActiveAccordion(isOpen ? null : (item.menu as AccordionKey))
                       }
                       aria-expanded={isOpen}
-                      className="flex w-full items-center justify-between px-4 py-3 text-left font-normal text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
+                      className="flex w-full items-center justify-between px-4 py-3 text-left text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
                     >
                       {item.label}
                       <ChevronDown
@@ -115,7 +115,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                                   key={sub.label}
                                   href={sub.href}
                                   onClick={onClose}
-                                  className="block rounded-xl bg-white px-3 py-2 text-sm font-normal text-slate-700"
+                                  className="block rounded-xl bg-white px-3 py-2 text-sm text-slate-700"
                                 >
                                   {sub.label}
                                 </Link>
@@ -130,7 +130,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                                     onClick={onClose}
                                     className="rounded-xl bg-white px-3 py-2.5"
                                   >
-                                    <span className="block text-sm font-normal text-brand-ink">
+                                    <span className="block text-sm text-brand-ink">
                                       {sub.id} {sub.title}
                                     </span>
                                     <span className="block text-xs text-slate-600">
@@ -152,7 +152,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             <Link
               href="#cta"
               onClick={onClose}
-              className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-brand-coral px-5 py-3 text-sm font-extrabold text-white shadow-soft transition-colors hover:bg-[#e96f5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-coral"
+              className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[var(--btn-color)] px-5 py-3 text-sm text-white shadow-soft transition-colors hover:bg-[var(--btn-color-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-coral"
             >
               Admission Open
             </Link>

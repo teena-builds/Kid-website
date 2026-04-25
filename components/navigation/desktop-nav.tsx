@@ -80,7 +80,7 @@ export function DesktopNav() {
             <li key={item.label}>
               <Link
                 href={item.href}
-                className="rounded-full px-4 py-2.5 text-[16px] font-medium text-brand-ink transition-colors hover:text-brand-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
+                className="rounded-full px-4 py-2.5 font-medium text-[16px] text-brand-ink transition-colors hover:text-brand-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
               >
                 {item.label}
               </Link>
@@ -104,7 +104,7 @@ export function DesktopNav() {
                 setOpenMenu(item.menu);
               }}
               onClick={() => setOpenMenu(isOpen ? null : item.menu)}
-              className="inline-flex items-center gap-1 rounded-full px-4 py-2.5 text-[16px] font-medium text-brand-ink transition-colors hover:text-brand-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
+              className="inline-flex items-center gap-1 rounded-full px-4 py-2.5 text-[16px] text-brand-ink transition-colors hover:text-brand-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
             >
               {item.label}
               <ChevronDown
@@ -132,7 +132,7 @@ export function DesktopNav() {
                       href={child.href}
                       role="menuitem"
                       onClick={() => setOpenMenu(null)}
-                      className="block rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-brand-cream hover:text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
+                      className="block rounded-xl font-medium px-4 py-2.5 text-sm text-slate-700 transition-colors hover:bg-brand-cream hover:text-brand-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
                     >
                       {child.label}
                     </Link>

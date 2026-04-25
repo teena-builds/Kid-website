@@ -31,13 +31,13 @@ export function MegaMenu({ panelId, onClose, className = "" }: MegaMenuProps) {
                 href={item.href}
                 role="menuitem"
                 onClick={onClose}
-                className="group flex rounded-2xl bg-white/85 p-4 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink/70"
+                className="group flex rounded-2xl bg-white p-4 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink/70"
               >
                 <span className="mr-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#dbf8f6] text-brand-ink">
                   <item.icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span>
-                  <span className="block font-[var(--font-display)] text-xl font-semibold text-brand-ink">
+                  <span className="block text-lg text-brand-ink font-semibold">
                     {item.id} {item.title}
                   </span>
                   <span className="mt-1 block text-sm text-slate-600">
@@ -49,9 +49,9 @@ export function MegaMenu({ panelId, onClose, className = "" }: MegaMenuProps) {
           </div>
         ))}
 
-        <article className="relative min-h-72 overflow-hidden rounded-3xl bg-gradient-to-br from-[#f8c259] via-[#f7a35b] to-[#ef7f6d] p-6 text-white shadow-soft">
+        <article className="relative min-h-72 overflow-hidden rounded-3xl bg-gradient-to-br from-[#000000] via-[#44260d] to-[#000000] p-6 text-white shadow-soft">
           <Image
-            src="https://images.pexels.com/photos/8613111/pexels-photo-8613111.jpeg?auto=compress&cs=tinysrgb&w=900"
+            src="https://images.pexels.com/photos/12944620/pexels-photo-12944620.jpeg?auto=compress&cs=tinysrgb&w=900"
             alt="Children learning numbers in a classroom"
             fill
             sizes="(max-width: 1024px) 100vw, 360px"
@@ -62,7 +62,7 @@ export function MegaMenu({ panelId, onClose, className = "" }: MegaMenuProps) {
             <p className="mb-2 text-xs uppercase tracking-[0.22em] text-white/85">
               New Season
             </p>
-            <h3 className="font-[var(--font-display)] text-4xl font-bold leading-tight">
+            <h3 className="text-4xl leading-tight">
               Join New Program
             </h3>
             <p className="mt-3 text-sm text-white/90">
@@ -71,7 +71,7 @@ export function MegaMenu({ panelId, onClose, className = "" }: MegaMenuProps) {
             <Link
               href="#programs"
               onClick={onClose}
-              className="mt-5 inline-flex w-fit items-center rounded-full bg-white px-5 py-2.5 text-sm font-bold text-brand-ink transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              className="mt-5 inline-flex w-fit items-center rounded-full bg-white px-5 py-2.5 text-sm text-brand-ink transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               View More
             </Link>

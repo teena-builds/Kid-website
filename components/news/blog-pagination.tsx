@@ -34,7 +34,7 @@ export function BlogPagination({ page, totalPages, onPageChange }: BlogPaginatio
             onClick={() => onPageChange(pageNumber)}
             aria-label={`Go to page ${pageNumber}`}
             aria-current={isActive ? "page" : undefined}
-            className={`inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-full text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${
               isActive
                 ? "bg-brand-teal text-white"
                 : "bg-[#edf1f4] text-slate-700 hover:-translate-y-0.5 hover:bg-[#e3e9ee]"

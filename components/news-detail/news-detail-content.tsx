@@ -126,14 +126,14 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
               </p>
             </div>
 
-            <h1 className="mt-4 font-[var(--font-display)] text-2xl leading-tight text-brand-ink sm:text-4xl">
+            <h1 className="mt-4 text-2xl leading-tight text-brand-ink sm:text-4xl">
               {post.title}
             </h1>
 
             {/* WordPress HTML content is rendered as real markup, preserving headings/lists/links/images. */}
             <div className="mt-4 rounded-2xl bg-white p-6 shadow-card sm:p-8">
               <div
-                className="prose prose-slate max-w-none prose-headings:font-[var(--font-display)] prose-headings:text-brand-ink prose-p:leading-relaxed prose-li:text-slate-700 prose-p:text-slate-600 prose-a:text-brand-teal hover:prose-a:text-brand-coral prose-img:rounded-2xl [&_h1]:mb-4 [&_h1]:mt-8 [&_h2]:scroll-mt-32 [&_h2]:mb-4 [&_h2]:mt-8 [&_h3]:mb-3 [&_h3]:mt-7 [&_h4]:mb-3 [&_h4]:mt-6 [&_h5]:mb-2 [&_h5]:mt-5 [&_h6]:mb-2 [&_h6]:mt-5 [&_p]:mb-4 [&_p]:mt-0 [&_ul]:mb-5 [&_ul]:mt-3 [&_ol]:mb-5 [&_ol]:mt-3 [&_li]:mb-1 [&_blockquote]:my-6 [&_blockquote]:rounded-xl [&_blockquote]:border-l-4 [&_blockquote]:border-[#f79a1e] [&_blockquote]:bg-[#fff6eb] [&_blockquote]:px-4 [&_blockquote]:py-3 [&_figure]:my-6 [&_img]:my-5 [&>*:first-child]:mt-0"
+                className="prose prose-slate max-w-none prose-headings:prose-headings:text-brand-ink prose-p:leading-relaxed prose-li:text-slate-700 prose-p:text-slate-600 prose-a:text-brand-teal hover:prose-a:text-brand-coral prose-img:rounded-2xl [&_h1]:mb-4 [&_h1]:mt-8 [&_h2]:scroll-mt-32 [&_h2]:mb-4 [&_h2]:mt-8 [&_h3]:mb-3 [&_h3]:mt-7 [&_h4]:mb-3 [&_h4]:mt-6 [&_h5]:mb-2 [&_h5]:mt-5 [&_h6]:mb-2 [&_h6]:mt-5 [&_p]:mb-4 [&_p]:mt-0 [&_ul]:mb-5 [&_ul]:mt-3 [&_ol]:mb-5 [&_ol]:mt-3 [&_li]:mb-1 [&_blockquote]:my-6 [&_blockquote]:rounded-xl [&_blockquote]:border-l-4 [&_blockquote]:border-[#f79a1e] [&_blockquote]:bg-[#fff6eb] [&_blockquote]:px-4 [&_blockquote]:py-3 [&_figure]:my-6 [&_img]:my-5 [&>*:first-child]:mt-0"
                 dangerouslySetInnerHTML={{ __html: htmlWithIds }}
               />
             </div>
@@ -150,7 +150,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
                 ))}
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-slate-500">Share:</span>
+                <span className="text-sm text-slate-500">Share:</span>
                 {["Facebook", "Twitter", "LinkedIn"].map((item) => (
                   <button
                     key={item}
@@ -170,7 +170,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
                   {previousPost ? (
                     <Link
                       href={`/news/${previousPost.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-brand-ink transition-colors hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
+                      className="inline-flex items-center gap-2 text-sm text-brand-ink transition-colors hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                     >
                       <ChevronLeft className="h-4 w-4" />
                       Previous Post
@@ -184,7 +184,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
                   {nextPost ? (
                     <Link
                       href={`/news/${nextPost.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-brand-ink transition-colors hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
+                      className="inline-flex items-center gap-2 text-sm text-brand-ink transition-colors hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                     >
                       Next Post
                       <ChevronRight className="h-4 w-4" />
@@ -200,7 +200,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
             <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
 
             <div className="rounded-2xl border border-[#ece3d6] bg-white p-5 shadow-card">
-              <h3 className="font-[var(--font-display)] text-3xl text-brand-ink">Latest Blog</h3>
+              <h3 className="text-3xl text-brand-ink">Latest Blog</h3>
               <div className="mt-4 space-y-4">
                 {latestPosts.map((item) => (
                   <Link
@@ -218,7 +218,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
                       />
                     </div>
                     <div>
-                      <p className="line-clamp-2 text-sm font-semibold leading-snug text-brand-ink transition-colors hover:text-brand-teal">
+                      <p className="line-clamp-2 text-sm leading-snug text-brand-ink transition-colors hover:text-brand-teal">
                         {item.title}
                       </p>
                       <p className="mt-1 text-xs text-slate-500">{item.date}</p>
@@ -229,7 +229,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
             </div>
 
             <div className="rounded-2xl border border-[#ece3d6] bg-white p-5 shadow-card">
-              <h3 className="font-[var(--font-display)] text-3xl text-brand-ink">Categories</h3>
+              <h3 className="text-3xl text-brand-ink">Categories</h3>
               <div className="mt-4 space-y-3">
                 {Object.entries(categoriesCount).map(([name, count]) => (
                   <div key={name} className="flex items-center justify-between text-sm text-slate-700">
@@ -244,13 +244,13 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
             </div>
 
             <div className="rounded-2xl border border-[#ece3d6] bg-white p-5 shadow-card">
-              <h3 className="font-[var(--font-display)] text-3xl text-brand-ink">Tags</h3>
+              <h3 className="text-3xl text-brand-ink">Tags</h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {(post.categories.length > 0 ? post.categories : [post.category]).map((tag) => (
                   <button
                     key={tag}
                     type="button"
-                    className="rounded-full bg-[#f4f8fb] px-3 py-1.5 text-xs font-semibold text-slate-600 transition-colors duration-300 hover:bg-[#dcf6f4] hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
+                    className="rounded-full bg-[#f4f8fb] px-3 py-1.5 text-xs text-slate-600 transition-colors duration-300 hover:bg-[#dcf6f4] hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                   >
                     {tag}
                   </button>
@@ -265,10 +265,10 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
       <section className="bg-[#fffaf1] pb-20 lg:pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-brand-coral">
+            <p className="text-sm uppercase tracking-[0.14em] text-brand-coral">
               Related Posts
             </p>
-            <h2 className="mt-3 font-[var(--font-display)] text-2xl text-brand-ink sm:text-5xl">
+            <h2 className="mt-3 text-2xl text-brand-ink sm:text-5xl">
               More Related Blog
             </h2>
             <p className="mt-3 text-lg text-slate-600">

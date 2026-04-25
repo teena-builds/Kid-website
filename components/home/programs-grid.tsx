@@ -11,10 +11,10 @@ export function ProgramsGrid() {
       <span id="programs" className="block scroll-mt-32" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-coral">
+          <p className="text-xs uppercase tracking-[0.2em] text-brand-coral">
             Programs
           </p>
-          <h2 className="mt-3 font-[var(--font-display)] text-4xl text-[#171b21] sm:text-5xl">
+          <h2 className="mt-3 text-4xl text-[#171b21] sm:text-5xl">
             Our Programs
           </h2>
           <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
@@ -39,7 +39,7 @@ export function ProgramsGrid() {
                 </div>
 
                 <div className="px-1 pb-1 pt-5">
-                  <h3 className="font-[var(--font-display)] text-[2rem] leading-tight text-[#161b22] sm:text-[1.8]">
+                  <h3 className="text-[2rem] leading-tight text-[#161b22] sm:text-[1.8]">
                     {card.title}
                   </h3>
                   <p className="mt-3 min-h-[3.7rem] text-base leading-relaxed text-slate-600 sm:text-lg">
@@ -52,16 +52,16 @@ export function ProgramsGrid() {
                   className={`mt-5 grid grid-cols-3 divide-x divide-white/35 overflow-hidden rounded-full text-white ${card.stripColor}`}
                 >
                   <div className="px-3 py-4 text-center">
-                    <p className="font-[var(--font-display)] text-xl leading-none">{card.age}</p>
-                    <p className="mt-1 text-sm font-semibold">age</p>
+                    <p className="text-xl leading-none">{card.age}</p>
+                    <p className="mt-1 text-sm">age</p>
                   </div>
                   <div className="px-3 py-4 text-center">
-                    <p className="font-[var(--font-display)] text-xl leading-none">{card.days}</p>
-                    <p className="mt-1 text-sm font-semibold">weekly</p>
+                    <p className="text-xl leading-none">{card.days}</p>
+                    <p className="mt-1 text-sm">weekly</p>
                   </div>
                   <div className="px-3 py-4 text-center">
-                    <p className="font-[var(--font-display)] text-xl leading-none">{card.hours}</p>
-                    <p className="mt-1 text-sm font-semibold">period</p>
+                    <p className="text-xl leading-none">{card.hours}</p>
+                    <p className="mt-1 text-sm">period</p>
                   </div>
                 </div>
               </article>

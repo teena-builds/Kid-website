@@ -18,7 +18,7 @@ export function CtaBand() {
 
         <Reveal className="relative z-10 flex min-h-[360px] items-center justify-center px-6 py-20 text-center sm:min-h-[420px] lg:px-8">
           <div className="mx-auto max-w-3xl">
-            <h2 className="font-[var(--font-display)] text-4xl font-medium leading-tight text-white sm:text-5xl lg:text-6xl">
+            <h2 className="text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
               Join Our New Session
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
@@ -27,7 +27,7 @@ export function CtaBand() {
             </p>
             <Link
               href="#newsletter"
-              className="mt-8 inline-flex rounded-full bg-brand-coral px-9 py-3.5 text-base font-medium text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] hover:bg-brand-coral/90 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-teal"
+              className="mt-8 inline-flex rounded-full bg-[var(--btn-color)] px-9 py-3.5 text-base text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] hover:bg-[var(--btn-color-hover)] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-teal"
             >
               Apply Now
             </Link>

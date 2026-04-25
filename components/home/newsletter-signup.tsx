@@ -8,10 +8,10 @@ export function NewsletterSignup() {
           <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-brand-lavender/25 blur-xl" />
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-coral">
+              <p className="text-xs uppercase tracking-[0.2em] text-brand-coral">
                 Newsletter
               </p>
-              <h2 className="mt-3 font-[var(--font-display)] text-4xl text-brand-ink sm:text-5xl">
+              <h2 className="mt-3 text-4xl text-brand-ink sm:text-5xl">
                 Get events, tips, and early program updates.
               </h2>
               <p className="mt-3 max-w-2xl text-slate-600">
@@ -33,7 +33,7 @@ export function NewsletterSignup() {
               />
               <button
                 type="submit"
-                className="h-12 rounded-full bg-brand-ink px-6 text-sm font-extrabold text-white transition-colors hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink"
+                className="h-12 rounded-full bg-[var(--btn-color)] px-6 text-sm text-white transition-colors hover:bg-[var(--btn-color-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink"
               >
                 Subscribe
               </button>

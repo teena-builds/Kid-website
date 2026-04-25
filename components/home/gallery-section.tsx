@@ -8,10 +8,10 @@ export function GallerySection() {
       <span id="gallery" className="block scroll-mt-32" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-coral">
+          <p className="text-xs uppercase tracking-[0.2em] text-brand-coral">
             Gallery
           </p>
-          <h2 className="mt-3 font-[var(--font-display)] text-4xl text-brand-ink sm:text-5xl">
+          <h2 className="mt-3 text-4xl text-brand-ink sm:text-5xl">
             Visual highlights from our spaces and events.
           </h2>
         </Reveal>

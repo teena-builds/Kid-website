@@ -21,7 +21,7 @@ export function PromoSection() {
       <span id="promo" className="block scroll-mt-32" aria-hidden="true" />
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-14 lg:px-8">
         <Reveal className="order-2 lg:order-1">
-          <h2 className="max-w-xl font-[var(--font-display)] text-5xl leading-[1.08] text-[#171b21] sm:text-6xl">
+          <h2 className="max-w-xl text-5xl leading-[1.08] text-[#171b21] sm:text-6xl">
             Know More
             <br />
             About Kindedo
@@ -49,7 +49,7 @@ export function PromoSection() {
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                      className="flex w-full items-center justify-between gap-4 rounded-2xl px-6 py-5 text-left text-xl font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
+                      className="flex w-full items-center justify-between gap-4 rounded-2xl px-6 py-5 text-left text-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
                     >
                       <span>{item.question}</span>
                       <span

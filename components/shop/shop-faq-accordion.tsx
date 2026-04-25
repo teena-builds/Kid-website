@@ -37,7 +37,7 @@ export function ShopFaqAccordion({ items }: ShopFaqAccordionProps) {
               onClick={() => setOpenIndex(isOpen ? -1 : idx)}
               className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
             >
-              <span className="text-xl font-medium">{item.question}</span>
+              <span className="text-xl">{item.question}</span>
               <span
                 className={`grid h-9 w-9 place-items-center rounded-full ${
                   isOpen ? "bg-white text-brand-mustard" : "bg-brand-cream text-brand-ink"

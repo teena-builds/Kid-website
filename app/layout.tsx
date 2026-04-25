@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 const fredoka = Fredoka({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "600"],
   variable: "--font-display"
 });
 
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fredoka.variable} ${fredoka.className} bg-brand-cream font-[var(--font-display)] font-light text-brand-ink antialiased`}
+        className={`${fredoka.variable} bg-brand-cream text-brand-ink antialiased`}
       >
         {children}
       </body>

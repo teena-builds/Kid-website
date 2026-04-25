@@ -32,12 +32,12 @@ function SectionHeading({
   return (
     <div className="mx-auto max-w-3xl text-center">
       <p
-        className={`text-sm font-semibold uppercase tracking-[0.16em] text-brand-coral ${labelClassName ?? ""}`}
+        className={`text-sm uppercase tracking-[0.16em] text-brand-coral ${labelClassName ?? ""}`}
       >
         {label}
       </p>
       <h2
-        className={`mt-3 font-[var(--font-display)] text-5xl font-semibold text-brand-ink sm:text-6xl ${titleClassName ?? ""}`}
+        className={`mt-3 text-5xl text-brand-ink sm:text-6xl ${titleClassName ?? ""}`}
       >
         {title}
       </h2>
@@ -72,7 +72,7 @@ function AboutIntroSplit() {
         </Reveal>
 
         <Reveal>
-          <h2 className="font-[var(--font-display)] text-5xl leading-[1.08] text-brand-ink sm:text-6xl">
+          <h2 className="text-5xl leading-[1.08] text-brand-ink sm:text-6xl">
             {aboutIntro.heading}
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
@@ -96,7 +96,7 @@ function AboutIntroSplit() {
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <Link
               href={aboutIntro.primaryCta.href}
-              className="inline-flex rounded-full bg-[#f89a1f] px-8 py-3 text-lg font-semibold text-white shadow-[0_14px_32px_-20px_rgba(248,154,31,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ef8a0e] hover:shadow-[0_18px_34px_-20px_rgba(248,154,31,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f89a1f]"
+              className="inline-flex rounded-full bg-[var(--btn-color)] px-8 py-3 text-lg text-white shadow-[0_14px_32px_-20px_rgba(248,154,31,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--btn-color-hover)] hover:shadow-[0_18px_34px_-20px_rgba(248,154,31,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f89a1f]"
             >
               {aboutIntro.primaryCta.label}
             </Link>
@@ -138,7 +138,7 @@ function WhyBestSection() {
                     <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#dbf8f6] text-brand-teal">
                       <Icon className="h-7 w-7" />
                     </span>
-                    <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold">
+                    <h3 className="mt-4 text-3xl">
                       {item.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-slate-600">
@@ -175,7 +175,7 @@ function FriendlyAtmosphereSection() {
     <section className="bg-[#fffaf1] py-20 lg:py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[52%_48%] lg:items-center lg:gap-14 lg:px-8">
         <Reveal>
-          <h2 className="font-[var(--font-display)] text-5xl leading-[1.08] text-brand-ink sm:text-6xl">
+          <h2 className="text-5xl leading-[1.08] text-brand-ink sm:text-6xl">
             {friendlyAtmosphere.heading}
           </h2>
           {friendlyAtmosphere.paragraphs.map((paragraph) => (
@@ -188,7 +188,7 @@ function FriendlyAtmosphereSection() {
             {friendlyAtmosphere.pills.map((pill) => (
               <div
                 key={pill}
-                className="inline-flex items-center gap-2 rounded-2xl bg-[#eaf8f7] px-4 py-2.5 text-sm font-semibold text-brand-ink shadow-card"
+                className="inline-flex items-center gap-2 rounded-2xl bg-[#eaf8f7] px-4 py-2.5 text-sm text-brand-ink shadow-card"
               >
                 <Sparkles className="h-4 w-4 text-brand-coral" />
                 {pill}
@@ -241,7 +241,7 @@ function TeachersAndStatsSection() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="mt-5 font-[var(--font-display)] text-3xl font-semibold text-brand-ink">
+                <h3 className="mt-5 text-3xl text-brand-ink">
                   {teacher.name}
                 </h3>
                 <p className="mt-1 text-base text-slate-600">{teacher.role}</p>
@@ -259,7 +259,7 @@ function TeachersAndStatsSection() {
                   {idx === 1 && <Users2 className="h-5 w-5" />}
                   {idx === 2 && <Award className="h-5 w-5" />}
                 </div>
-                <p className="mt-4 font-[var(--font-display)] text-5xl font-semibold text-brand-ink">
+                <p className="mt-4 text-5xl text-brand-ink">
                   {stat.value}
                 </p>
                 <p className="mt-1 text-base text-slate-600">{stat.label}</p>

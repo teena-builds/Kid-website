@@ -51,7 +51,7 @@ export function BlogCard({ post }: BlogCardProps) {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             onError={() => setImageSrc("/newsletter.jpg")}
           />
-          <span className="absolute bottom-3 left-3 rounded-lg bg-[#f79a1e] px-3 py-1 text-xs font-semibold text-white">
+          <span className="absolute bottom-3 left-3 rounded-lg bg-[#f79a1e] px-3 py-1 text-xs text-white">
             {post.date}
           </span>
         </div>
@@ -68,7 +68,7 @@ export function BlogCard({ post }: BlogCardProps) {
             </p>
           </div>
 
-          <h3 className="mt-3 line-clamp-2 font-[var(--font-display)] text-xl leading-tight text-brand-ink transition-colors duration-300 group-hover:text-brand-teal">
+          <h3 className="mt-3 line-clamp-2 text-xl leading-tight text-brand-ink transition-colors duration-300 group-hover:text-brand-teal">
             {titleText}
           </h3>
           <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">

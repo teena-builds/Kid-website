@@ -8,10 +8,10 @@ export function UpcomingEvents() {
     <section id="events" className="section-surface bg-[#fff8f3] py-20 lg:py-28">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-coral">
+          <p className="text-xs uppercase tracking-[0.2em] text-brand-coral">
             Upcoming Events
           </p>
-          <h2 className="mt-3 font-[var(--font-display)] text-4xl text-brand-ink sm:text-5xl">
+          <h2 className="mt-3 text-4xl text-brand-ink sm:text-5xl">
             Discover what&apos;s happening this month.
           </h2>
         </Reveal>
@@ -19,17 +19,17 @@ export function UpcomingEvents() {
           {upcomingEvents.map((item, idx) => (
             <Reveal key={item.title} delay={idx * 0.07}>
               <article className="rounded-[1.75rem] bg-white p-6 shadow-card ring-1 ring-slate-100 transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
-                <p className="inline-flex items-center gap-2 rounded-full bg-brand-cream px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-coral">
+                <p className="inline-flex items-center gap-2 rounded-full bg-brand-cream px-3 py-1 text-xs uppercase tracking-wide text-brand-coral">
                   <Calendar className="h-3.5 w-3.5" /> {item.date}
                 </p>
-                <h3 className="mt-4 font-[var(--font-display)] text-3xl leading-tight text-brand-ink">
+                <h3 className="mt-4 text-3xl leading-tight text-brand-ink">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-sm font-semibold text-brand-sky">{item.ageGroup}</p>
+                <p className="mt-3 text-sm text-brand-sky">{item.ageGroup}</p>
                 <p className="mt-2 text-sm text-slate-600">{item.description}</p>
                 <Link
                   href="#cta"
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-brand-ink hover:text-brand-coral"
+                  className="mt-5 inline-flex items-center gap-2 text-sm text-brand-ink hover:text-brand-coral"
                 >
                   Reserve Spot <ArrowRight className="h-4 w-4" />
                 </Link>

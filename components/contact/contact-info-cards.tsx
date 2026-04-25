@@ -35,7 +35,7 @@ export function ContactInfoCards() {
               href={item.href}
               target={item.label === "Visit Us" ? "_blank" : undefined}
               rel={item.label === "Visit Us" ? "noreferrer noopener" : undefined}
-              className="group flex min-h-[250px] flex-col items-center justify-center rounded-3xl border border-[#f2d8b6] bg-[#fff6eb] p-8 text-center shadow-[0_16px_34px_-28px_rgba(35,43,50,0.45)] transition-all duration-300 hover:-translate-y-1 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
+              className="group flex min-h-[250px] flex-col items-center justify-center rounded-3xl border border-[#f2d8b6] bg-[#ffffff] p-8 text-center shadow-[0_16px_34px_-28px_rgba(35,43,50,0.45)] transition-all duration-300 hover:-translate-y-1 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky"
               aria-label={`${item.label}: ${item.value}`}
             >
               <span
@@ -46,7 +46,7 @@ export function ContactInfoCards() {
                 <item.icon className="h-10 w-10" aria-hidden="true" />
               </span>
               <p className="sr-only">{item.label}</p>
-              <p className="mt-9 max-w-[280px] text-[1.2rem] leading-normal font-semibold text-brand-ink">
+              <p className="mt-9 max-w-[280px] text-[1.2rem] leading-normal text-brand-ink">
                 {item.value}
               </p>
             </a>

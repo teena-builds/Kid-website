@@ -96,7 +96,7 @@ export function TocNav({ headings }: TocNavProps) {
 
   return (
     <div className="rounded-2xl border border-[#ece3d6] bg-white p-5 shadow-card">
-      <h3 className="font-[var(--font-display)] text-2xl text-brand-ink">Table of Contents</h3>
+      <h3 className="text-2xl text-brand-ink">Table of Contents</h3>
       <nav className="mt-4" aria-label="Table of contents">
         <ul className="space-y-1.5">
           {headings.map((item) => {
@@ -116,7 +116,7 @@ export function TocNav({ headings }: TocNavProps) {
                   }}
                   className={`block line-clamp-2 rounded-lg border-l-2 px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${
                     isActive
-                      ? "border-brand-teal bg-[#dcf6f4] font-semibold text-brand-teal"
+                      ? "border-brand-teal bg-[#dcf6f4] text-brand-teal"
                       : "border-transparent text-slate-600 hover:bg-[#eef9f8] hover:text-brand-teal"
                   }`}
                 >

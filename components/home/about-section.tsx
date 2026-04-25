@@ -8,7 +8,7 @@ import { FloatingScribble } from "./floating-scribble";
 
 export function AboutSection() {
   return (
-    <section id="why-choose-us" className="scroll-mt-32 bg-[#f5f5f3] py-20 lg:py-28">
+    <section id="why-choose-us" className="scroll-mt-32 bg-[#ffffff] py-20 lg:py-28">
       <span id="about" className="block scroll-mt-32" aria-hidden="true" />
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[48%_52%] lg:items-center lg:gap-14 lg:px-8">
         <Reveal className="relative">
@@ -34,7 +34,7 @@ export function AboutSection() {
         </Reveal>
 
         <Reveal>
-          <h2 className="font-[var(--font-display)] text-5xl leading-[1.08] text-[#1b1f25] sm:text-6xl">
+          <h2 className="text-5xl leading-[1.08] text-[#1b1f25] sm:text-6xl">
             {aboutShowcase.heading}
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
@@ -46,10 +46,10 @@ export function AboutSection() {
             <div className="grid gap-3 sm:grid-cols-3 sm:divide-x sm:divide-white/30">
               {aboutShowcase.stats.map((stat) => (
                 <div key={stat.label} className="px-3 py-1.5">
-                  <p className="font-[var(--font-display)] text-5xl leading-none">
+                  <p className="text-5xl leading-none">
                     {stat.value}
                   </p>
-                  <p className="mt-1 text-sm font-medium text-white/95">{stat.label}</p>
+                  <p className="mt-1 text-sm text-white/95">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -69,7 +69,7 @@ export function AboutSection() {
           <div className="mt-8 flex flex-wrap items-center gap-6">
             <Link
               href={aboutShowcase.primaryCta.href}
-              className="inline-flex rounded-full bg-[#f89a1f] px-8 py-3 text-lg font-bold text-white shadow-[0_14px_32px_-20px_rgba(248,154,31,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#ef8a0e] hover:shadow-[0_18px_34px_-20px_rgba(248,154,31,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f89a1f]"
+              className="inline-flex rounded-full bg-[var(--btn-color)] px-8 py-3 text-lg text-white shadow-[0_14px_32px_-20px_rgba(248,154,31,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--btn-color-hover)] hover:shadow-[0_18px_34px_-20px_rgba(248,154,31,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f89a1f]"
             >
               {aboutShowcase.primaryCta.label}
             </Link>
@@ -84,7 +84,7 @@ export function AboutSection() {
                 <span className="absolute inset-[-16px] rounded-full border border-[#f7e5c8]" />
                 <Play className="h-5 w-5 fill-current" />
               </span>
-              <span className="text-lg font-medium text-[#4c5563]">
+              <span className="text-lg text-[#4c5563]">
                 {aboutShowcase.videoCta.label}
               </span>
             </Link>

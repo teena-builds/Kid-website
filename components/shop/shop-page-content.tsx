@@ -19,10 +19,10 @@ function SectionTitle({
 }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
-      <p className="text-sm font-medium uppercase tracking-[0.14em] text-brand-coral">
+      <p className="text-sm uppercase tracking-[0.14em] text-brand-coral">
         {label}
       </p>
-      <h2 className="mt-3 font-[var(--font-display)] text-5xl font-semibold text-brand-ink">
+      <h2 className="mt-3 text-5xl text-brand-ink">
         {title}
       </h2>
       <p className="mt-3 text-lg leading-relaxed text-slate-600">{desc}</p>
@@ -50,7 +50,7 @@ function IntroSplit({
           <Image src={image} alt={imageAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover transition-transform duration-500 hover:scale-[1.03]" />
         </div>
         <div>
-          <h2 className="font-[var(--font-display)] text-5xl font-semibold text-brand-ink">
+          <h2 className="text-5xl text-brand-ink">
             {title}
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-slate-600">{description}</p>
@@ -106,7 +106,7 @@ function PlayGroupSections() {
             {cards.map((card, idx) => (
               <article key={card.title} className={`rounded-3xl p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft ${["bg-[#ecfbfa]", "bg-[#fff4ea]", "bg-[#f4f0ff]"][idx]}`}>
                 <Sparkles className="h-7 w-7 text-brand-coral" />
-                <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold text-brand-ink">{card.title}</h3>
+                <h3 className="mt-4 text-3xl text-brand-ink">{card.title}</h3>
                 <p className="mt-3 text-base leading-relaxed text-slate-600">{card.text}</p>
               </article>
             ))}
@@ -124,7 +124,7 @@ function PlayGroupSections() {
           <div className="mx-auto mt-10 max-w-4xl space-y-4">
             {routine.map(([time, text]) => (
               <div key={time} className="flex flex-col rounded-2xl bg-white px-6 py-4 shadow-card sm:flex-row sm:items-center sm:justify-between">
-                <p className="font-[var(--font-display)] text-3xl font-semibold text-brand-teal">{time}</p>
+                <p className="text-3xl text-brand-teal">{time}</p>
                 <p className="text-lg text-slate-600">{text}</p>
               </div>
             ))}
@@ -168,7 +168,7 @@ function NurserySections() {
           <div className="grid gap-6 md:grid-cols-3">
             {cards.map((card, idx) => (
               <article key={card.title} className={`rounded-3xl p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft ${["bg-[#eaf9ff]", "bg-[#fff4ea]", "bg-[#ecfbf6]"][idx]}`}>
-                <h3 className="font-[var(--font-display)] text-3xl font-semibold text-brand-ink">{card.title}</h3>
+                <h3 className="text-3xl text-brand-ink">{card.title}</h3>
                 <p className="mt-3 text-base text-slate-600">{card.text}</p>
               </article>
             ))}
@@ -179,7 +179,7 @@ function NurserySections() {
       <section className="bg-[#f7fbff] py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
           <div className="rounded-3xl bg-white p-8 shadow-card">
-            <h3 className="font-[var(--font-display)] text-4xl font-semibold text-brand-ink">
+            <h3 className="text-4xl text-brand-ink">
               Way to Learn
             </h3>
             <ul className="mt-5 space-y-4 text-lg text-slate-600">
@@ -189,13 +189,13 @@ function NurserySections() {
             </ul>
           </div>
           <div className="rounded-3xl bg-white p-8 shadow-card">
-            <h3 className="font-[var(--font-display)] text-4xl font-semibold text-brand-ink">
+            <h3 className="text-4xl text-brand-ink">
               Weekly Timetable
             </h3>
             <div className="mt-5 space-y-3">
               {timetable.map(([day, item]) => (
                 <div key={day} className="flex items-center justify-between rounded-2xl bg-[#f8fafc] px-4 py-3">
-                  <span className="font-medium text-brand-ink">{day}</span>
+                  <span className="text-brand-ink">{day}</span>
                   <span className="text-slate-600">{item}</span>
                 </div>
               ))}
@@ -249,7 +249,7 @@ function JuniorKgSections() {
               "Math Foundations"
             ].map((skill, idx) => (
               <article key={skill} className={`rounded-3xl p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft ${["bg-[#eef8ff]", "bg-[#fff5ea]", "bg-[#edfdfa]"][idx]}`}>
-                <h3 className="font-[var(--font-display)] text-3xl font-semibold text-brand-ink">{skill}</h3>
+                <h3 className="text-3xl text-brand-ink">{skill}</h3>
                 <p className="mt-3 text-base text-slate-600">
                   Carefully designed practice activities help children master {skill.toLowerCase()} with confidence.
                 </p>
@@ -262,7 +262,7 @@ function JuniorKgSections() {
       <section className="bg-[#fff8ef] py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
           <div className="rounded-3xl bg-white p-8 shadow-card">
-            <h3 className="font-[var(--font-display)] text-4xl font-semibold text-brand-ink">
+            <h3 className="text-4xl text-brand-ink">
               Teacher-Guided Growth
             </h3>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
@@ -314,7 +314,7 @@ function SeniorKgSections() {
           <div className="grid gap-6 md:grid-cols-3">
             {stats.map((item, idx) => (
               <article key={item.label} className={`rounded-3xl p-7 text-center shadow-card ${["bg-[#ecfbf7]", "bg-[#fff4ea]", "bg-[#edf4ff]"][idx]}`}>
-                <p className="font-[var(--font-display)] text-6xl font-semibold text-brand-ink">{item.value}</p>
+                <p className="text-6xl text-brand-ink">{item.value}</p>
                 <p className="mt-2 text-lg text-slate-600">{item.label}</p>
               </article>
             ))}
@@ -325,7 +325,7 @@ function SeniorKgSections() {
       <section className="bg-[#f7fbff] py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-2 lg:px-8">
           <div className="overflow-hidden rounded-3xl bg-white shadow-card">
-            <h3 className="bg-brand-teal px-6 py-5 font-[var(--font-display)] text-4xl font-semibold text-white">
+            <h3 className="bg-brand-teal px-6 py-5 text-4xl text-white">
               Detailed Timetable
             </h3>
             <div className="divide-y divide-slate-100 px-6 py-4 text-base">
@@ -336,14 +336,14 @@ function SeniorKgSections() {
                 ["Communication Workshop", "Daily short module"]
               ].map(([topic, days]) => (
                 <div key={topic} className="flex items-center justify-between py-3">
-                  <span className="font-medium text-brand-ink">{topic}</span>
+                  <span className="text-brand-ink">{topic}</span>
                   <span className="text-slate-600">{days}</span>
                 </div>
               ))}
             </div>
           </div>
           <div className="rounded-3xl bg-white p-8 shadow-card">
-            <h3 className="font-[var(--font-display)] text-4xl font-semibold text-brand-ink">
+            <h3 className="text-4xl text-brand-ink">
               Learning Outcomes
             </h3>
             <ul className="mt-5 space-y-3 text-lg text-slate-700">
@@ -387,7 +387,7 @@ function ActivityClassesSections() {
             {activities.map((item, idx) => (
               <article key={item.title} className={`rounded-3xl p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft ${["bg-[#ecfbf8]", "bg-[#eef7ff]", "bg-[#fff0f6]", "bg-[#fff4ea]"][idx]}`}>
                 <item.icon className="h-7 w-7 text-brand-coral" />
-                <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold text-brand-ink">{item.title}</h3>
+                <h3 className="mt-4 text-3xl text-brand-ink">{item.title}</h3>
                 <p className="mt-3 text-base text-slate-600">{item.desc}</p>
               </article>
             ))}
@@ -419,7 +419,7 @@ function ActivityClassesSections() {
             {timings.map(([title, days, time]) => (
               <article key={title} className="rounded-3xl bg-white p-6 shadow-card">
                 <Clock3 className="h-6 w-6 text-brand-teal" />
-                <h3 className="mt-3 font-[var(--font-display)] text-2xl font-semibold text-brand-ink">{title}</h3>
+                <h3 className="mt-3 text-2xl text-brand-ink">{title}</h3>
                 <p className="mt-2 text-base text-slate-600">{days}</p>
                 <p className="mt-1 text-sm text-brand-coral">{time}</p>
               </article>
@@ -474,7 +474,7 @@ function DayCareSections() {
             ].map((item, idx) => (
               <article key={item.title} className={`rounded-3xl p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft ${["bg-[#ecfbf8]", "bg-[#fff4ea]", "bg-[#edf4ff]"][idx]}`}>
                 <item.icon className="h-7 w-7 text-brand-coral" />
-                <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold text-brand-ink">{item.title}</h3>
+                <h3 className="mt-4 text-3xl text-brand-ink">{item.title}</h3>
                 <p className="mt-3 text-base text-slate-600">{item.desc}</p>
               </article>
             ))}
@@ -493,7 +493,7 @@ function DayCareSections() {
               ["Evening Wind-Down", "Storytime, pick-up prep, and parent handover updates."]
             ].map(([title, desc]) => (
               <article key={title} className="rounded-3xl bg-white p-6 shadow-card">
-                <h3 className="font-[var(--font-display)] text-3xl font-semibold text-brand-ink">{title}</h3>
+                <h3 className="text-3xl text-brand-ink">{title}</h3>
                 <p className="mt-3 text-base text-slate-600">{desc}</p>
               </article>
             ))}

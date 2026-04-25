@@ -14,38 +14,38 @@ export const heroSlides = [
   {
     id: "kindergarten-program",
     tag: "Kindergarten Program",
-    heading: "Best Children’s Education",
+    heading: "Children’s Education & Activities.",
     description:
       "A warm and trusted place where little learners grow through guided activities, gentle care, and joyful classrooms.",
     primaryCta: { label: "Admission Open 22-23", href: "#programs" },
     image:
       "https://images.pexels.com/photos/8613100/pexels-photo-8613100.jpeg?auto=compress&cs=tinysrgb&w=2200",
     imageAlt: "Children learning together in a kindergarten classroom",
-    bgClass: "from-[#fffaf1] to-[#c7e9e7]"
+    bgClass: "from-[#fbf1df] to-[#dae9e8]"
   },
   {
     id: "creative-learning",
     tag: "Creative Learning",
-    heading: "Great Fun For All",
+    heading: "Imaginations Flourish in Safe Indoor Oasis.",
     description:
       "Colorful activities, music, movement, and collaborative play make every school day exciting and memorable.",
     primaryCta: { label: "Explore Activities", href: "#events" },
     image:
       "https://images.pexels.com/photos/8471833/pexels-photo-8471833.jpeg?auto=compress&cs=tinysrgb&w=1400",
     imageAlt: "Children painting together in a bright classroom",
-    bgClass: "from-[#f1fff6] to-[#fff7ed]"
+    bgClass: "from-[#f1fff6] to-[#f1e5d7]"
   },
   {
     id: "kids-play-room",
     tag: "Kids Play Room",
-    heading: "The Most Impactful Care",
+    heading: "Devoted to Nurturing Joy And Growth.",
     description:
       "Safe indoor spaces, attentive teachers, and child-first routines create comfort, confidence, and meaningful progress.",
     primaryCta: { label: "Join New Program", href: "#cta" },
     image:
       "https://images.pexels.com/photos/8471887/pexels-photo-8471887.jpeg?auto=compress&cs=tinysrgb&w=1400",
     imageAlt: "Children learning and smiling together",
-    bgClass: "from-[#ebfdfb] to-[#ffefdc]"
+    bgClass: "from-[#d2e9e6] to-[#ffefdc]"
   }
 ];
 

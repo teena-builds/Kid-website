@@ -43,7 +43,7 @@ export function Header() {
               height={44}
               priority
             />
-            <span className="font-[var(--font-display)] text-3xl font-bold text-brand-ink">
+            <span className="text-3xl text-brand-ink">
               KidNest
             </span>
           </Link>
@@ -53,7 +53,7 @@ export function Header() {
           <div className="flex items-center gap-3">
             <Link
               href="#cta"
-              className="hidden rounded-full bg-brand-coral px-5 py-2.5 text-sm font-light text-white shadow-soft transition-colors hover:bg-[#e96f5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-coral lg:inline-flex"
+              className="hidden rounded-full bg-[var(--btn-color)] px-5 py-2.5 text-sm text-white shadow-soft transition-colors hover:bg-[var(--btn-color-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-coral lg:inline-flex"
             >
               Admission Open
             </Link>

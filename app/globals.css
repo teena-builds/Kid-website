@@ -5,48 +5,49 @@
 :root {
   --bg: #fffdf7;
   --text: #263238;
+  --btn-color: #EF7F6D;
+  --btn-color-hover: #e46f60;
 }
 
 html {
   scroll-behavior: smooth;
 }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-display), "Fredoka", sans-serif;
-  font-weight: 300;
-}
-
 @layer base {
-  .font-\[var\(--font-display\)\] {
-    font-family: var(--font-display), "Fredoka", sans-serif !important;
+  button {
+    @apply font-medium; /* 👈 500 */
   }
 }
+@layer base {
+  body {
+    color: var(--text);
+    font-family: "Fredoka", sans-serif;
+    font-weight: 400;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-display), "Fredoka", sans-serif;
-  font-weight: 600!important;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Fredoka", sans-serif;
+    font-weight: 600;
+  }
 
-button,
-input[type="button"],
-input[type="submit"],
-input[type="reset"] {
-  font-family: var(--font-display), "Fredoka", sans-serif;
-  font-weight: 500 !important;
-}
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    font-family: "Fredoka", sans-serif;
+    font-weight: 500;
+  }
 
-input,
-textarea,
-select {
-  font-family: var(--font-display), "Fredoka", sans-serif;
-  font-weight: 400;
+  input,
+  textarea,
+  select {
+    font-family: "Fredoka", sans-serif;
+    font-weight: 400;
+  }
 }
 
 .section-surface {

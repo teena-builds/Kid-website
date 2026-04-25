@@ -71,7 +71,7 @@ export function Testimonials() {
               if (event.key === "ArrowLeft") goPrev();
             }}
           >
-            <h2 className="font-[var(--font-display)] text-4xl font-semibold leading-tight sm:text-5xl">
+            <h2 className="text-4xl leading-tight sm:text-5xl">
               {testimonialPanel.heading}
             </h2>
 
@@ -113,7 +113,7 @@ export function Testimonials() {
                         className="h-14 w-14 rounded-full object-cover ring-2 ring-white/35"
                       />
                       <div>
-                        <p className="font-[var(--font-display)] text-2xl font-semibold leading-tight text-white">
+                        <p className="text-2xl leading-tight text-white">
                           {item.name}
                         </p>
                         <p className="text-sm text-white/80">{item.role}</p>
