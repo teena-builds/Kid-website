@@ -1,6 +1,73 @@
+"use client";
+
+import type { FormEvent } from "react";
+import { useRef, useState } from "react";
 import { Send } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+type ContactPayload = {
+  fullName: string;
+  company: string;
+  phone: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+function submitContactInBackground(payload: ContactPayload) {
+  const body = JSON.stringify(payload);
+
+  try {
+    if (navigator.sendBeacon) {
+      const blob = new Blob([body], { type: "application/json" });
+      if (navigator.sendBeacon("/api/contact", blob)) {
+        return;
+      }
+    }
+
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+      keepalive: true
+    }).catch((error) => {
+      console.error("Contact form background submission failed:", error);
+    });
+  } catch (error) {
+    console.error("Contact form background submission could not be queued:", error);
+  }
+}
 
 export function ContactForm() {
+  const router = useRouter();
+  const hasSubmitted = useRef(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (hasSubmitted.current) {
+      return;
+    }
+
+    hasSubmitted.current = true;
+    setIsSubmitting(true);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      fullName: String(formData.get("fullName") || ""),
+      company: String(formData.get("company") || ""),
+      phone: String(formData.get("phone") || ""),
+      email: String(formData.get("email") || ""),
+      subject: String(formData.get("subject") || ""),
+      message: String(formData.get("message") || "")
+    };
+
+    submitContactInBackground(payload);
+    router.push("/thank-you");
+  }
+
   return (
     <section className="relative max-w-[550px] overflow-hidden rounded-2xl bg-[#eefcff]/95 p-6 shadow-[0_24px_60px_-34px_rgba(4,56,68,0.7)] sm:p-7">
       <div className="pointer-events-none absolute inset-3 rounded-[1.35rem] border-2 border-dashed border-[#1fb8d3]/50" />
@@ -17,7 +84,7 @@ export function ContactForm() {
         Have Questions About Enrollment?
       </h2>
 
-      <form className="relative z-10 mt-6 space-y-3.5" aria-label="Contact form">
+      <form className="relative z-10 mt-6 space-y-3.5" aria-label="Contact form" onSubmit={handleSubmit}>
         <div className="grid gap-3.5 sm:grid-cols-2">
           <div>
             <label htmlFor="contact-full-name" className="mb-2 block text-sm text-[#103f47]">
@@ -100,10 +167,11 @@ export function ContactForm() {
 
         <button
           type="submit"
+          disabled={isSubmitting}
           className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[var(--btn-color)] px-8 text-xs uppercase tracking-wide text-white shadow-[0_16px_34px_-22px_rgba(247,154,30,0.95)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--btn-color-hover)] hover:shadow-[0_20px_40px_-22px_rgba(247,154,30,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-coral"
         >
           <Send className="h-4 w-4" aria-hidden="true" />
-          Send Message
+          {isSubmitting ? "Sending..." : "Send Message"}
         </button>
       </form>
     </section>
