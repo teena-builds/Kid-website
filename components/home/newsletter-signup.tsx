@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/ui/reveal";
+import { NewsletterForm } from "@/components/newsletter/newsletter-form";
 
 export function NewsletterSignup() {
   return (
@@ -19,25 +20,15 @@ export function NewsletterSignup() {
                 workshops, seasonal activities, and family offers.
               </p>
             </div>
-            <form className="flex flex-col gap-3 sm:flex-row" aria-label="Newsletter signup">
-              <label htmlFor="newsletter-email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="newsletter-email"
-                name="email"
-                type="email"
-                required
-                placeholder="Enter your email"
-                className="h-12 flex-1 rounded-full border border-slate-300 px-5 text-sm outline-none transition focus:border-brand-sky focus:ring-2 focus:ring-brand-sky/35"
-              />
-              <button
-                type="submit"
-                className="h-12 rounded-full bg-[var(--btn-color)] px-6 text-sm text-white transition-colors hover:bg-[var(--btn-color-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink"
-              >
-                Subscribe
-              </button>
-            </form>
+            <NewsletterForm
+              formClassName="relative flex flex-col gap-3 sm:flex-row"
+              inputId="newsletter-email"
+              placeholder="Enter your email"
+              inputClassName="h-12 flex-1 rounded-full border border-slate-300 px-5 text-sm outline-none transition focus:border-brand-sky focus:ring-2 focus:ring-brand-sky/35 disabled:cursor-not-allowed disabled:opacity-70"
+              buttonClassName="h-12 rounded-full bg-[var(--btn-color)] px-6 text-sm text-white transition-colors hover:bg-[var(--btn-color-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ink disabled:cursor-not-allowed disabled:opacity-70"
+              buttonLabel="Subscribe"
+              ariaLabel="Newsletter signup"
+            />
           </div>
         </Reveal>
       </div>
