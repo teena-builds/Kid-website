@@ -39,8 +39,6 @@ function wordpressRemotePatterns() {
 }
 
 const nextConfig: NextConfig = {
-  // Keep dev and production artifacts isolated to avoid stale chunk/runtime mismatches.
-  distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next-new",
   images: {
     remotePatterns: wordpressRemotePatterns()
   }
