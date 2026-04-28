@@ -5,12 +5,12 @@ import {
   Mail,
   MapPin,
   Phone,
-  Send,
   Twitter,
   Youtube
 } from "lucide-react";
 import { footerContact, footerLinks } from "@/data/home-data";
 import { FooterTopWave } from "@/components/shared/footer-top-wave";
+import { NewsletterForm } from "@/components/newsletter/newsletter-form";
 import { getAllPosts } from "@/lib/wordpress";
 import type { NewsPost } from "@/data/news-data";
 
@@ -140,28 +140,17 @@ export async function Footer() {
             Subscribe our newsletter to get our latest update and news.
           </p>
 
-          <form
-            className="relative z-10 mx-auto mt-8 flex w-full max-w-2xl flex-col items-center gap-3 sm:flex-row"
-            aria-label="Newsletter subscription"
-          >
-            <label htmlFor="footer-newsletter-email" className="sr-only">
-              Your email
-            </label>
-            <input
-              id="footer-newsletter-email"
-              type="email"
-              required
-              placeholder="Your email"
-              className="h-14 w-full rounded-full border border-transparent bg-white px-6 text-base text-brand-ink placeholder:text-slate-500 outline-none transition focus-visible:ring-2 focus-visible:ring-white/80"
-            />
-            <button
-              type="submit"
-              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-[var(--btn-color)] px-7 text-base text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--btn-color-hover)] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-            >
-              <Send className="h-4 w-4" aria-hidden="true" />
-              Subscribe Now
-            </button>
-          </form>
+          <NewsletterForm
+            formClassName="relative z-10 mx-auto mt-8 flex w-full max-w-2xl flex-col items-center gap-3 sm:flex-row"
+            inputId="footer-newsletter-email"
+            placeholder="Your email"
+            inputClassName="h-14 w-full rounded-full border border-transparent bg-white px-6 text-base text-brand-ink placeholder:text-slate-500 outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 disabled:cursor-not-allowed disabled:opacity-70"
+            buttonClassName="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-[var(--btn-color)] px-7 text-base text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--btn-color-hover)] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:cursor-not-allowed disabled:opacity-70"
+            buttonLabel="Subscribe Now"
+            ariaLabel="Newsletter subscription"
+            messageClassName="text-white"
+            showSendIcon
+          />
         </section>
 
         <div className="grid gap-10 px-1 pb-4 pt-14 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.2fr]">

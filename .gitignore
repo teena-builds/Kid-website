@@ -21,3 +21,5 @@ pnpm-debug.log*
 
 # env files
 .env*
+
+.vercel
