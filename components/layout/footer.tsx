@@ -262,6 +262,7 @@ export async function Footer() {
                       alt={post.imageAlt}
                       fill
                       sizes="64px"
+                      unoptimized
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                     />
                   </span>

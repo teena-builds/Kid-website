@@ -126,7 +126,22 @@ function getNumber(record: JsonRecord | null, key: string): number | null {
   return null;
 }
 
-function extractFeaturedImage(post: JsonRecord): string {
+function normalizeDirectWordPressImageUrl(value: string): string | null {
+  if (!value.includes("/wp-content/uploads/")) return null;
+
+  try {
+    const url = new URL(value);
+    if (!/\.(?:jpe?g|png|webp)$/i.test(url.pathname)) return null;
+    if (url.hostname.endsWith(".wordpress.com")) {
+      return `https://i0.wp.com/${url.hostname}${url.pathname}`;
+    }
+    return `${url.origin}${url.pathname}`;
+  } catch {
+    return null;
+  }
+}
+
+function extractEmbeddedFeaturedMediaUrl(post: JsonRecord): string {
   const embedded = asRecord(post._embedded);
   const embeddedMediaArray = Array.isArray(embedded?.["wp:featuredmedia"])
     ? embedded?.["wp:featuredmedia"]
@@ -134,22 +149,21 @@ function extractFeaturedImage(post: JsonRecord): string {
   const firstMedia = embeddedMediaArray && embeddedMediaArray.length > 0
     ? asRecord(embeddedMediaArray[0])
     : null;
-  const embeddedMedia = getString(firstMedia, "source_url");
-  if (typeof embeddedMedia === "string" && embeddedMedia.length > 0) return embeddedMedia;
 
-  const jetpackImage = getString(post, "jetpack_featured_media_url");
-  if (jetpackImage.length > 0) {
-    return jetpackImage;
-  }
+  return getString(firstMedia, "source_url");
+}
 
-  const featuredImage = getString(post, "featured_image");
-  if (featuredImage.length > 0) {
-    return featuredImage;
-  }
+function extractFeaturedImage(post: JsonRecord): string {
+  const candidates = [
+    extractEmbeddedFeaturedMediaUrl(post),
+    getString(post, "featured_media_url")
+  ];
 
-  const featuredMediaUrl = getString(post, "featured_media_url");
-  if (featuredMediaUrl.length > 0) {
-    return featuredMediaUrl;
+  for (const candidate of candidates) {
+    const directImage = normalizeDirectWordPressImageUrl(candidate);
+    if (directImage) {
+      return directImage;
+    }
   }
 
   return DEFAULT_IMAGE;

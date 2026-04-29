@@ -48,6 +48,7 @@ export function BlogCard({ post }: BlogCardProps) {
             alt={post.imageAlt}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            unoptimized
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             onError={() => setImageSrc("/newsletter.jpg")}
           />
