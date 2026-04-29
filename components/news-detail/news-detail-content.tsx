@@ -72,6 +72,75 @@ function isInternalContentLink(href: string) {
   }
 }
 
+function normalizeDirectWordPressUploadMediaUrl(value: string): string | null {
+  if (!value.includes("/wp-content/uploads/")) return null;
+
+  try {
+    const url = new URL(value.replace(/&amp;/g, "&"));
+    const isImage = /\.(?:gif|jpe?g|png|webp)$/i.test(url.pathname);
+    const isVideo = /\.(?:m4v|mov|mp4|ogg|ogv|webm)$/i.test(url.pathname);
+    if (!isImage && !isVideo) return null;
+
+    if (isImage && url.hostname.endsWith(".wordpress.com")) {
+      return `https://i0.wp.com/${url.hostname}${url.pathname}`;
+    }
+
+    return `${url.origin}${url.pathname}`;
+  } catch {
+    return null;
+  }
+}
+
+function normalizeWordPressSrcSet(value: string) {
+  return value
+    .split(",")
+    .map((candidate) => {
+      const trimmedCandidate = candidate.trim();
+      const [urlPart, ...descriptorParts] = trimmedCandidate.split(/\s+/);
+      const normalizedUrl = normalizeDirectWordPressUploadMediaUrl(urlPart);
+      return normalizedUrl
+        ? [normalizedUrl, ...descriptorParts].join(" ")
+        : trimmedCandidate;
+    })
+    .join(", ");
+}
+
+function normalizeWordPressContentMediaUrls(html: string) {
+  return html
+    .replace(
+      /\s(href|poster|src)\s*=\s*(['"])(.*?)\2/gi,
+      (attribute, name, quote, value) => {
+        const normalizedUrl = normalizeDirectWordPressUploadMediaUrl(String(value));
+        return normalizedUrl ? ` ${name}=${quote}${normalizedUrl}${quote}` : attribute;
+      }
+    )
+    .replace(/\ssrcset\s*=\s*(['"])(.*?)\1/gi, (_, quote, value) => {
+      return ` srcset=${quote}${normalizeWordPressSrcSet(String(value))}${quote}`;
+    });
+}
+
+function pointMediaWrapperLinksToDirectMedia(html: string) {
+  return html.replace(/<a\b([^>]*)>([\s\S]*?<img\b[^>]*>[\s\S]*?)<\/a>/gi, (anchor, attrs, innerHtml) => {
+    const hrefMatch = String(attrs).match(/\shref\s*=\s*(['"])(.*?)\1/i);
+    const imageSrcMatch = String(innerHtml).match(/<img\b[^>]*\ssrc\s*=\s*(['"])(.*?)\1/i);
+    if (!hrefMatch || !imageSrcMatch || !isInternalContentLink(hrefMatch[2])) {
+      return anchor;
+    }
+
+    const normalizedImageUrl = normalizeDirectWordPressUploadMediaUrl(imageSrcMatch[2]);
+    if (!normalizedImageUrl) {
+      return anchor;
+    }
+
+    const normalizedAttrs = String(attrs).replace(
+      /\shref\s*=\s*(['"]).*?\1/i,
+      ` href=${hrefMatch[1]}${normalizedImageUrl}${hrefMatch[1]}`
+    );
+
+    return `<a${normalizedAttrs}>${innerHtml}</a>`;
+  });
+}
+
 function openInternalContentLinksInSameTab(html: string) {
   return html.replace(/<a\b([^>]*)>/gi, (anchor, attrs) => {
     const hrefMatch = String(attrs).match(/\shref\s*=\s*(['"])(.*?)\1/i);
@@ -127,7 +196,9 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
     currentIndex >= 0 && currentIndex < allPosts.length - 1
       ? allPosts[currentIndex + 1]
       : null;
-  const normalizedContentHtml = openInternalContentLinksInSameTab(htmlWithIds);
+  const contentHtmlWithNormalizedMedia = normalizeWordPressContentMediaUrls(htmlWithIds);
+  const contentHtmlWithDirectMediaLinks = pointMediaWrapperLinksToDirectMedia(contentHtmlWithNormalizedMedia);
+  const normalizedContentHtml = openInternalContentLinksInSameTab(contentHtmlWithDirectMediaLinks);
 
   return (
     <>
@@ -177,7 +248,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
             {/* WordPress HTML content is rendered as real markup, preserving headings/lists/links/images. */}
             <div className="mt-4 rounded-2xl bg-white p-6 shadow-card sm:p-8">
               <div
-                className="prose prose-slate max-w-none prose-headings:prose-headings:text-brand-ink prose-p:leading-relaxed prose-li:text-slate-700 prose-p:text-slate-600 prose-a:text-brand-teal hover:prose-a:text-brand-coral prose-img:rounded-2xl [&_h1]:mb-4 [&_h1]:mt-8 [&_h2]:scroll-mt-32 [&_h2]:mb-4 [&_h2]:mt-8 [&_h3]:mb-3 [&_h3]:mt-7 [&_h4]:mb-3 [&_h4]:mt-6 [&_h5]:mb-2 [&_h5]:mt-5 [&_h6]:mb-2 [&_h6]:mt-5 [&_p]:mb-4 [&_p]:mt-0 [&_ul]:mb-5 [&_ul]:mt-3 [&_ol]:mb-5 [&_ol]:mt-3 [&_li]:mb-1 [&_blockquote]:my-6 [&_blockquote]:rounded-xl [&_blockquote]:border-l-4 [&_blockquote]:border-[#f79a1e] [&_blockquote]:bg-[#fff6eb] [&_blockquote]:px-4 [&_blockquote]:py-3 [&_figure]:my-6 [&_img]:my-5 [&>*:first-child]:mt-0"
+                className="prose prose-slate max-w-none prose-headings:prose-headings:text-brand-ink prose-p:leading-relaxed prose-li:text-slate-700 prose-p:text-slate-600 prose-a:text-brand-teal hover:prose-a:text-brand-coral prose-img:rounded-2xl [&_h1]:mb-4 [&_h1]:mt-8 [&_h2]:scroll-mt-32 [&_h2]:mb-4 [&_h2]:mt-8 [&_h3]:mb-3 [&_h3]:mt-7 [&_h4]:mb-3 [&_h4]:mt-6 [&_h5]:mb-2 [&_h5]:mt-5 [&_h6]:mb-2 [&_h6]:mt-5 [&_p]:mb-4 [&_p]:mt-0 [&_ul]:mb-5 [&_ul]:mt-3 [&_ol]:mb-5 [&_ol]:mt-3 [&_li]:mb-1 [&_blockquote]:my-6 [&_blockquote]:rounded-xl [&_blockquote]:border-l-4 [&_blockquote]:border-[#f79a1e] [&_blockquote]:bg-[#fff6eb] [&_blockquote]:px-4 [&_blockquote]:py-3 [&_figure]:my-6 [&_img]:my-5 [&_video]:my-5 [&_video]:w-full [&_video]:rounded-2xl [&>*:first-child]:mt-0"
                 dangerouslySetInnerHTML={{ __html: normalizedContentHtml }}
               />
             </div>
