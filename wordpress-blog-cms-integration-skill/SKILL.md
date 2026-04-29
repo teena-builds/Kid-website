@@ -22,6 +22,8 @@ Rules:
 - Keep hydration-safe behavior (localStorage only in useEffect).
 - Render WordPress HTML content as real HTML.
 - Add next/image host support for WordPress domains.
+- Normalize direct WordPress upload image URLs and use `unoptimized` for external WP images when needed.
+- Keep internal WordPress content links opening in the same tab.
 - Provide changed files, env vars, and test checklist.
 ```
 
@@ -77,7 +79,9 @@ Requirements:
 - Timeout around `6000ms`
 - Retry attempts: `2`
 - Parse `_embedded` featured media when available
-- Support WP.com fields like `jetpack_featured_media_url`, `featured_image`
+- Prefer standard WordPress featured media from `_embedded["wp:featuredmedia"].source_url`, then `featured_media_url` if available
+- Normalize WordPress.com upload URLs to `https://i0.wp.com/<host>/<wp-content/uploads path>`
+- Ignore non-direct or non-image media URLs and fall back to `DEFAULT_IMAGE`
 - Return normalized shape used by existing UI
 - Keep HTML fields (`excerpt.rendered`, `content.rendered`) as HTML
 
@@ -157,21 +161,38 @@ function formatDate(value: string) {
   return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" });
 }
 
-function extractFeaturedImage(post: JsonRecord) {
+function normalizeDirectWordPressImageUrl(value: string): string | null {
+  if (!value.includes("/wp-content/uploads/")) return null;
+
+  try {
+    const url = new URL(value);
+    if (!/\.(?:jpe?g|png|webp)$/i.test(url.pathname)) return null;
+    if (url.hostname.endsWith(".wordpress.com")) {
+      return `https://i0.wp.com/${url.hostname}${url.pathname}`;
+    }
+    return `${url.origin}${url.pathname}`;
+  } catch {
+    return null;
+  }
+}
+
+function extractEmbeddedFeaturedMediaUrl(post: JsonRecord) {
   const embedded = asRecord(post._embedded);
   const mediaArray = Array.isArray(embedded?.["wp:featuredmedia"]) ? embedded?.["wp:featuredmedia"] : null;
   const firstMedia = mediaArray?.length ? asRecord(mediaArray[0]) : null;
-  const fromEmbedded = getString(firstMedia, "source_url");
-  if (fromEmbedded) return fromEmbedded;
+  return getString(firstMedia, "source_url");
+}
 
-  const fromJetpack = getString(post, "jetpack_featured_media_url");
-  if (fromJetpack) return fromJetpack;
+function extractFeaturedImage(post: JsonRecord) {
+  const candidates = [
+    extractEmbeddedFeaturedMediaUrl(post),
+    getString(post, "featured_media_url")
+  ];
 
-  const fromFeaturedImage = getString(post, "featured_image");
-  if (fromFeaturedImage) return fromFeaturedImage;
-
-  const fromFeaturedMediaUrl = getString(post, "featured_media_url");
-  if (fromFeaturedMediaUrl) return fromFeaturedMediaUrl;
+  for (const candidate of candidates) {
+    const directImage = normalizeDirectWordPressImageUrl(candidate);
+    if (directImage) return directImage;
+  }
 
   return DEFAULT_IMAGE;
 }
@@ -325,6 +346,65 @@ Use WP HTML safely in existing layout:
 
 No raw tags visible; keep headings/lists/links/images formatting.
 
+### Internal content links
+
+WordPress content may include absolute links back to the same WordPress site with `target="_blank"` or external `rel` attributes. Preserve external links, but normalize internal links so content navigation stays in the same tab.
+
+Use this pattern in the detail content component before `dangerouslySetInnerHTML`:
+
+```ts
+function getWordPressHost() {
+  const wpUrl = process.env.WORDPRESS_API_URL;
+  if (!wpUrl) return "";
+
+  try {
+    const parsed = new URL(wpUrl);
+    const siteMatch = parsed.pathname.match(/\/sites\/([^/]+)/);
+    const siteToken = siteMatch?.[1] ? decodeURIComponent(siteMatch[1]) : "";
+    return siteToken.includes(".") ? siteToken : parsed.hostname;
+  } catch {
+    return "";
+  }
+}
+
+function isInternalContentLink(href: string) {
+  const trimmedHref = href.trim();
+  if (trimmedHref.startsWith("/") || trimmedHref.startsWith("#")) return true;
+
+  try {
+    const url = new URL(trimmedHref);
+    const wordpressHost = getWordPressHost();
+    return wordpressHost.length > 0 && url.hostname === wordpressHost;
+  } catch {
+    return false;
+  }
+}
+
+function openInternalContentLinksInSameTab(html: string) {
+  return html.replace(/<a\b([^>]*)>/gi, (anchor, attrs) => {
+    const hrefMatch = String(attrs).match(/\shref\s*=\s*(['"])(.*?)\1/i);
+    if (!hrefMatch || !isInternalContentLink(hrefMatch[2])) return anchor;
+
+    const normalizedAttrs = String(attrs)
+      .replace(/\starget\s*=\s*(['"]).*?\1/gi, "")
+      .replace(/\srel\s*=\s*(['"]).*?\1/gi, "");
+
+    return `<a${normalizedAttrs}>`;
+  });
+}
+```
+
+Then render:
+
+```tsx
+const normalizedContentHtml = openInternalContentLinksInSameTab(post.contentHtml || post.excerptHtml);
+
+<div
+  className="prose prose-slate max-w-none"
+  dangerouslySetInnerHTML={{ __html: normalizedContentHtml }}
+/>
+```
+
 ## 7) `next.config.ts` Image Hosts
 
 Allow:
@@ -364,6 +444,19 @@ function wordpressRemotePatterns() {
 
   return patterns;
 }
+```
+
+Also add `unoptimized` to `next/image` usages that render external WordPress images if optimized image fetching fails locally, on Vercel, or with `i0.wp.com` URLs:
+
+```tsx
+<Image
+  src={post.image}
+  alt={post.imageAlt}
+  fill
+  sizes="(max-width: 768px) 100vw, 33vw"
+  unoptimized
+  className="object-cover"
+/>
 ```
 
 ## 8) Runtime Stability Patch (Optional)
@@ -440,7 +533,9 @@ Add in:
 - timeout too short => raise to ~6000ms + retry(2)
 - posts draft/private => not visible in public API
 - raw HTML visible => render with `dangerouslySetInnerHTML`
+- internal WordPress content links open new tab => strip `target`/`rel` for internal same-host links before rendering
 - next/image host error => update `remotePatterns`
+- external WP image URL still broken => normalize direct `/wp-content/uploads/` image URL and add `unoptimized`
 - WP.com `/sites/<domain>/posts` domain not whitelisted
 - hydration mismatch => localStorage read during render
 - webpack stale chunk error => dist split + clean scripts
@@ -458,9 +553,10 @@ Add in:
 5. Open blog detail page
 6. Verify featured images load
 7. Verify HTML rendering in detail content
-8. Verify stale cache fallback by throttling/offline
-9. Check `/api/blog-posts`
-10. Check `/api/blog-posts/[slug]`
+8. Verify internal links in WordPress detail content open in the same tab
+9. Verify stale cache fallback by throttling/offline
+10. Check `/api/blog-posts`
+11. Check `/api/blog-posts/[slug]`
 
 ### Vercel
 

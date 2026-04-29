@@ -45,6 +45,48 @@ function toKebabCase(text: string) {
     .replace(/^-+|-+$/g, "");
 }
 
+function getWordPressHost() {
+  const wpUrl = process.env.WORDPRESS_API_URL;
+  if (!wpUrl) return "";
+
+  try {
+    const parsed = new URL(wpUrl);
+    const siteMatch = parsed.pathname.match(/\/sites\/([^/]+)/);
+    const siteToken = siteMatch?.[1] ? decodeURIComponent(siteMatch[1]) : "";
+    return siteToken.includes(".") ? siteToken : parsed.hostname;
+  } catch {
+    return "";
+  }
+}
+
+function isInternalContentLink(href: string) {
+  const trimmedHref = href.trim();
+  if (trimmedHref.startsWith("/") || trimmedHref.startsWith("#")) return true;
+
+  try {
+    const url = new URL(trimmedHref);
+    const wordpressHost = getWordPressHost();
+    return wordpressHost.length > 0 && url.hostname === wordpressHost;
+  } catch {
+    return false;
+  }
+}
+
+function openInternalContentLinksInSameTab(html: string) {
+  return html.replace(/<a\b([^>]*)>/gi, (anchor, attrs) => {
+    const hrefMatch = String(attrs).match(/\shref\s*=\s*(['"])(.*?)\1/i);
+    if (!hrefMatch || !isInternalContentLink(hrefMatch[2])) {
+      return anchor;
+    }
+
+    const normalizedAttrs = String(attrs)
+      .replace(/\starget\s*=\s*(['"]).*?\1/gi, "")
+      .replace(/\srel\s*=\s*(['"]).*?\1/gi, "");
+
+    return `<a${normalizedAttrs}>`;
+  });
+}
+
 function addIdsToH2Headings(html: string): { htmlWithIds: string; headings: TocHeading[] } {
   const usedIds = new Map<string, number>();
   const headings: TocHeading[] = [];
@@ -85,6 +127,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
     currentIndex >= 0 && currentIndex < allPosts.length - 1
       ? allPosts[currentIndex + 1]
       : null;
+  const normalizedContentHtml = openInternalContentLinksInSameTab(htmlWithIds);
 
   return (
     <>
@@ -106,6 +149,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
                 alt={post.imageAlt}
                 width={1600}
                 height={900}
+                unoptimized
                 className="h-[360px] w-full object-cover sm:h-[460px]"
                 priority
               />
@@ -134,7 +178,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
             <div className="mt-4 rounded-2xl bg-white p-6 shadow-card sm:p-8">
               <div
                 className="prose prose-slate max-w-none prose-headings:prose-headings:text-brand-ink prose-p:leading-relaxed prose-li:text-slate-700 prose-p:text-slate-600 prose-a:text-brand-teal hover:prose-a:text-brand-coral prose-img:rounded-2xl [&_h1]:mb-4 [&_h1]:mt-8 [&_h2]:scroll-mt-32 [&_h2]:mb-4 [&_h2]:mt-8 [&_h3]:mb-3 [&_h3]:mt-7 [&_h4]:mb-3 [&_h4]:mt-6 [&_h5]:mb-2 [&_h5]:mt-5 [&_h6]:mb-2 [&_h6]:mt-5 [&_p]:mb-4 [&_p]:mt-0 [&_ul]:mb-5 [&_ul]:mt-3 [&_ol]:mb-5 [&_ol]:mt-3 [&_li]:mb-1 [&_blockquote]:my-6 [&_blockquote]:rounded-xl [&_blockquote]:border-l-4 [&_blockquote]:border-[#f79a1e] [&_blockquote]:bg-[#fff6eb] [&_blockquote]:px-4 [&_blockquote]:py-3 [&_figure]:my-6 [&_img]:my-5 [&>*:first-child]:mt-0"
-                dangerouslySetInnerHTML={{ __html: htmlWithIds }}
+                dangerouslySetInnerHTML={{ __html: normalizedContentHtml }}
               />
             </div>
 
@@ -214,6 +258,7 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
                         alt={item.imageAlt}
                         fill
                         sizes="80px"
+                        unoptimized
                         className="object-cover"
                       />
                     </div>
