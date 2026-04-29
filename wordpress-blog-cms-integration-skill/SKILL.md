@@ -23,6 +23,7 @@ Rules:
 - Render WordPress HTML content as real HTML.
 - Add next/image host support for WordPress domains.
 - Normalize direct WordPress upload image URLs and use `unoptimized` for external WP images when needed.
+- Normalize WordPress HTML content media URLs (`src`, `srcset`, `href`, `poster`) for images, GIFs, and videos so browser open-in-new-tab uses direct media files.
 - Keep internal WordPress content links opening in the same tab.
 - Provide changed files, env vars, and test checklist.
 ```
@@ -81,7 +82,7 @@ Requirements:
 - Parse `_embedded` featured media when available
 - Prefer standard WordPress featured media from `_embedded["wp:featuredmedia"].source_url`, then `featured_media_url` if available
 - Normalize WordPress.com upload URLs to `https://i0.wp.com/<host>/<wp-content/uploads path>`
-- Ignore non-direct or non-image media URLs and fall back to `DEFAULT_IMAGE`
+- Ignore non-direct or non-image media URLs and fall back to the project's existing fallback image, or add a small local placeholder asset if the project has none
 - Return normalized shape used by existing UI
 - Keep HTML fields (`excerpt.rendered`, `content.rendered`) as HTML
 
@@ -91,7 +92,7 @@ Reference pattern:
 // lib/wordpress.ts
 import type { NewsPost } from "@/data/news-data";
 
-const DEFAULT_IMAGE = "/newsletter.jpg";
+const DEFAULT_IMAGE = "/newsletter.jpg"; // Replace with an existing project fallback image, or add a local placeholder asset.
 const REQUEST_TIMEOUT_MS = 6000;
 
 type JsonRecord = Record<string, unknown>;
@@ -346,6 +347,92 @@ Use WP HTML safely in existing layout:
 
 No raw tags visible; keep headings/lists/links/images formatting.
 
+### Content media URLs
+
+WordPress HTML may include media in `img`, `video`, `source`, and wrapper `a` tags. Normalize direct `/wp-content/uploads/` media URLs before rendering so right-click/open-in-new-tab does not open a WordPress.com attachment/Jetpack preview page. Handle `src`, `srcset`, `href`, and `poster`.
+
+Use this pattern in the detail content component before `dangerouslySetInnerHTML`:
+
+```ts
+function normalizeDirectWordPressUploadMediaUrl(value: string): string | null {
+  if (!value.includes("/wp-content/uploads/")) return null;
+
+  try {
+    const url = new URL(value.replace(/&amp;/g, "&"));
+    const isImage = /\.(?:gif|jpe?g|png|webp)$/i.test(url.pathname);
+    const isVideo = /\.(?:m4v|mov|mp4|ogg|ogv|webm)$/i.test(url.pathname);
+    if (!isImage && !isVideo) return null;
+
+    if (isImage && url.hostname.endsWith(".wordpress.com")) {
+      return `https://i0.wp.com/${url.hostname}${url.pathname}`;
+    }
+
+    return `${url.origin}${url.pathname}`;
+  } catch {
+    return null;
+  }
+}
+
+function normalizeWordPressSrcSet(value: string) {
+  return value
+    .split(",")
+    .map((candidate) => {
+      const trimmedCandidate = candidate.trim();
+      const [urlPart, ...descriptorParts] = trimmedCandidate.split(/\s+/);
+      const normalizedUrl = normalizeDirectWordPressUploadMediaUrl(urlPart);
+      return normalizedUrl ? [normalizedUrl, ...descriptorParts].join(" ") : trimmedCandidate;
+    })
+    .join(", ");
+}
+
+function normalizeWordPressContentMediaUrls(html: string) {
+  return html
+    .replace(/\s(href|poster|src)\s*=\s*(['"])(.*?)\2/gi, (attribute, name, quote, value) => {
+      const normalizedUrl = normalizeDirectWordPressUploadMediaUrl(String(value));
+      return normalizedUrl ? ` ${name}=${quote}${normalizedUrl}${quote}` : attribute;
+    })
+    .replace(/\ssrcset\s*=\s*(['"])(.*?)\1/gi, (_, quote, value) => {
+      return ` srcset=${quote}${normalizeWordPressSrcSet(String(value))}${quote}`;
+    });
+}
+```
+
+If WordPress wraps images in links, point internal media-wrapper links at the normalized direct image URL:
+
+```ts
+function pointMediaWrapperLinksToDirectMedia(html: string) {
+  return html.replace(/<a\b([^>]*)>([\s\S]*?<img\b[^>]*>[\s\S]*?)<\/a>/gi, (anchor, attrs, innerHtml) => {
+    const hrefMatch = String(attrs).match(/\shref\s*=\s*(['"])(.*?)\1/i);
+    const imageSrcMatch = String(innerHtml).match(/<img\b[^>]*\ssrc\s*=\s*(['"])(.*?)\1/i);
+    if (!hrefMatch || !imageSrcMatch || !isInternalContentLink(hrefMatch[2])) return anchor;
+
+    const normalizedImageUrl = normalizeDirectWordPressUploadMediaUrl(imageSrcMatch[2]);
+    if (!normalizedImageUrl) return anchor;
+
+    const normalizedAttrs = String(attrs).replace(
+      /\shref\s*=\s*(['"]).*?\1/i,
+      ` href=${hrefMatch[1]}${normalizedImageUrl}${hrefMatch[1]}`
+    );
+
+    return `<a${normalizedAttrs}>${innerHtml}</a>`;
+  });
+}
+```
+
+Render with the full normalization pipeline:
+
+```tsx
+const html = post.contentHtml || post.excerptHtml;
+const htmlWithMediaUrls = normalizeWordPressContentMediaUrls(html);
+const htmlWithDirectMediaLinks = pointMediaWrapperLinksToDirectMedia(htmlWithMediaUrls);
+const normalizedContentHtml = openInternalContentLinksInSameTab(htmlWithDirectMediaLinks);
+
+<div
+  className="prose prose-slate max-w-none [&_video]:w-full"
+  dangerouslySetInnerHTML={{ __html: normalizedContentHtml }}
+/>
+```
+
 ### Internal content links
 
 WordPress content may include absolute links back to the same WordPress site with `target="_blank"` or external `rel` attributes. Preserve external links, but normalize internal links so content navigation stays in the same tab.
@@ -536,6 +623,7 @@ Add in:
 - internal WordPress content links open new tab => strip `target`/`rel` for internal same-host links before rendering
 - next/image host error => update `remotePatterns`
 - external WP image URL still broken => normalize direct `/wp-content/uploads/` image URL and add `unoptimized`
+- content image/GIF/video opens WordPress.com preview page on right-click => normalize content `srcset`, `src`, `href`, and `poster`, then point WP media-wrapper links to direct media
 - WP.com `/sites/<domain>/posts` domain not whitelisted
 - hydration mismatch => localStorage read during render
 - webpack stale chunk error => dist split + clean scripts
@@ -554,9 +642,10 @@ Add in:
 6. Verify featured images load
 7. Verify HTML rendering in detail content
 8. Verify internal links in WordPress detail content open in the same tab
-9. Verify stale cache fallback by throttling/offline
-10. Check `/api/blog-posts`
-11. Check `/api/blog-posts/[slug]`
+9. Right-click content images/GIFs/videos and verify open-in-new-tab opens direct media, not a WordPress.com attachment/Jetpack preview page
+10. Verify stale cache fallback by throttling/offline
+11. Check `/api/blog-posts`
+12. Check `/api/blog-posts/[slug]`
 
 ### Vercel
 
