@@ -12,7 +12,7 @@ export const primaryNavItems = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Programs", href: "#programs", menu: "programs" as const },
-  { label: "Shop", href: "#shop", menu: "shop" as const },
+  { label: "Classes", href: "#classes", menu: "shop" as const },
   { label: "Blog", href: "/news" },
   { label: "Contact Us", href: "/contact" }
 ];

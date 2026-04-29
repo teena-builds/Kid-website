@@ -276,8 +276,8 @@ export const footerLinks = {
   quick: [
     { label: "About", href: "#about" },
     { label: "Programs", href: "#programs" },
-    { label: "Shop", href: "#shop" },
-    { label: "Classes", href: "#programs" },
+    { label: "Classes", href: "#classes" },
+    { label: "Activities", href: "#programs" },
     { label: "News", href: "#events" },
     { label: "Contact", href: "#footer" }
   ],

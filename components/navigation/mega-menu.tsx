@@ -14,7 +14,7 @@ export function MegaMenu({ panelId, onClose, className = "" }: MegaMenuProps) {
     <motion.div
       id={panelId}
       role="menu"
-      aria-label="Shop categories"
+      aria-label="Classes menu"
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
