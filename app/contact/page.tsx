@@ -6,6 +6,14 @@ import { ContactForm } from "@/components/contact/contact-form";
 import Image from "next/image";
 import { BookOpen, Headphones, Lightbulb, Mail } from "lucide-react";
 import Link from "next/link";
+import { breadcrumbSchema, createPageMetadata, jsonLdProps } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "KidNest Play Center | Contact Us & Book a Visit",
+  description:
+    "Contact KidNest Play Center to ask about admissions, book a visit, explore programs, or get parent-friendly support for your child.",
+  path: "/contact"
+});
 
 const contactBanner = {
   title: "Contact Us",
@@ -18,7 +26,7 @@ const contactBanner = {
 const supportCards = [
   {
     title: "Parent Support",
-    text: "Get help with admissions, programs, and everything you need to start your child’s journey with us.",
+    text: "Get help with admissions, programs, safety routines, and everything you need to start your child's journey with us.",
     button: "Contact Us",
     href: "/contact",
     icon: Headphones,
@@ -27,7 +35,7 @@ const supportCards = [
   },
   {
     title: "Admission Help",
-    text: "Have questions about enrollment or process? Our team will guide you step-by-step.",
+    text: "Have questions about enrollment or the secure admission process? Our team will guide you step-by-step.",
     button: "Start Inquiry",
     href: "/contact#form",
     icon: Mail,
@@ -36,7 +44,7 @@ const supportCards = [
   },
   {
     title: "Explore Programs",
-    text: "Discover our learning programs designed to nurture creativity, growth, and confidence.",
+    text: "Discover preschool, day care, and activity programs designed to nurture creativity, growth, and confidence.",
     button: "View Programs",
     href: "/programs",
     icon: BookOpen,
@@ -50,6 +58,14 @@ export default function ContactPage() {
     <>
       <Header />
       <main>
+        <script
+          {...jsonLdProps(
+            breadcrumbSchema([
+              { name: "Home", path: "/" },
+              { name: "Contact", path: "/contact" }
+            ])
+          )}
+        />
         <InnerBanner banner={contactBanner} />
         <ContactInfoCards />
 

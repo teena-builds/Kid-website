@@ -345,9 +345,9 @@ export function HeroSection() {
                   ) : (
                     <div aria-hidden="true" className="opacity-0">
                       <p className="text-lg text-brand-teal">{slide.tag}</p>
-                      <h1 className="mt-4 text-5xl leading-[0.98] tracking-tight text-[#17191d] sm:text-7xl lg:text-8xl">
+                      <h2 className="mt-4 text-5xl leading-[0.98] tracking-tight text-[#17191d] sm:text-7xl lg:text-8xl">
                         {slide.heading}
-                      </h1>
+                      </h2>
                       <p className="mt-6 max-w-lg text-lg leading-relaxed text-slate-600">
                         {slide.description}
                       </p>
@@ -376,8 +376,8 @@ export function HeroSection() {
                       alt={slide.imageAlt}
                       fill
                       quality={92}
-                      priority={idx < 2}
-                      loading={idx < 2 ? "eager" : "lazy"}
+                      priority={idx === 0}
+                      loading={idx === 0 ? "eager" : "lazy"}
                       sizes="(max-width: 1024px) 90vw, 620px"
                       className="object-cover object-bottom sm:object-center"
                     />

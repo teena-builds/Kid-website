@@ -5,12 +5,12 @@ import {
   ChevronLeft,
   ChevronRight,
   Grid2X2,
-  Share2,
   UserRound
 } from "lucide-react";
 import { BlogCard } from "@/components/news/blog-card";
 import { TocNav } from "@/components/news-detail/toc-nav";
 import type { NewsPost } from "@/data/news-data";
+import { absoluteUrl } from "@/lib/seo";
 
 type NewsDetailContentProps = {
   post: NewsPost;
@@ -21,6 +21,32 @@ type TocHeading = {
   id: string;
   text: string;
 };
+
+const shareIconClassName = "h-4 w-4";
+
+function WhatsappIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={shareIconClassName} fill="currentColor">
+      <path d="M12.04 3.5a8.45 8.45 0 0 0-7.17 12.92L3.88 20l3.68-.96A8.46 8.46 0 1 0 12.04 3.5Zm0 1.55a6.91 6.91 0 1 1 0 13.82 6.85 6.85 0 0 1-3.52-.96l-.25-.15-2.18.57.58-2.12-.16-.27a6.91 6.91 0 0 1 5.53-10.89Zm-2.9 3.67c-.15 0-.39.06-.6.29-.2.22-.78.76-.78 1.86 0 1.1.8 2.16.91 2.31.11.15 1.55 2.48 3.84 3.37 1.9.75 2.29.6 2.7.56.41-.04 1.33-.54 1.52-1.07.19-.52.19-.97.13-1.07-.06-.1-.21-.16-.44-.28-.23-.11-1.33-.66-1.54-.73-.2-.08-.35-.11-.5.11-.15.23-.58.73-.71.88-.13.15-.26.17-.49.06-.23-.12-.96-.36-1.84-1.14-.68-.6-1.14-1.35-1.27-1.58-.13-.23-.01-.35.1-.47.1-.1.23-.26.34-.39.11-.13.15-.23.23-.38.08-.15.04-.28-.02-.39-.06-.11-.5-1.21-.69-1.66-.18-.44-.36-.38-.5-.39h-.43Z" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={shareIconClassName} fill="currentColor">
+      <path d="M13.45 20.5v-7.73h2.6l.39-3.01h-2.99V7.83c0-.87.24-1.46 1.49-1.46h1.59v-2.7a21.39 21.39 0 0 0-2.32-.12c-2.3 0-3.87 1.4-3.87 3.98v2.23h-2.6v3.01h2.6v7.73h3.11Z" />
+    </svg>
+  );
+}
+
+function TwitterIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={shareIconClassName} fill="currentColor">
+      <path d="M18.24 3.5h2.86l-6.25 7.14 7.35 9.72h-5.75l-4.5-5.89-5.16 5.89H3.93l6.69-7.65L3.57 3.5h5.9l4.07 5.38 4.7-5.38Zm-1 15.15h1.59L8.61 5.12H6.9l10.34 13.53Z" />
+    </svg>
+  );
+}
 
 function decodeHeadingText(text: string) {
   return text
@@ -186,7 +212,12 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
   const { htmlWithIds, headings } = addIdsToH2Headings(contentHtml);
 
   const categoriesCount = allPosts.reduce<Record<string, number>>((acc, item) => {
-    acc[item.category] = (acc[item.category] ?? 0) + 1;
+    const categories = item.categories.length > 0 ? item.categories : [item.category];
+    categories.forEach((category) => {
+      const name = category.trim();
+      if (name.length === 0) return;
+      acc[name] = (acc[name] ?? 0) + 1;
+    });
     return acc;
   }, {});
 
@@ -199,6 +230,28 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
   const contentHtmlWithNormalizedMedia = normalizeWordPressContentMediaUrls(htmlWithIds);
   const contentHtmlWithDirectMediaLinks = pointMediaWrapperLinksToDirectMedia(contentHtmlWithNormalizedMedia);
   const normalizedContentHtml = openInternalContentLinksInSameTab(contentHtmlWithDirectMediaLinks);
+  const shareUrl = absoluteUrl(`/news/${post.slug}`);
+  const shareTitle = post.title;
+  const shareLinks = [
+    {
+      label: "WhatsApp",
+      href: `https://wa.me/?text=${encodeURIComponent(`${shareTitle} ${shareUrl}`)}`,
+      icon: WhatsappIcon,
+      className: "bg-[#25D366] text-white hover:bg-[#1fb456]"
+    },
+    {
+      label: "Facebook",
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+      icon: FacebookIcon,
+      className: "bg-[#1877F2] text-white hover:bg-[#145dbd]"
+    },
+    {
+      label: "Twitter",
+      href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareTitle)}`,
+      icon: TwitterIcon,
+      className: "bg-black text-white hover:bg-[#2b2b2b]"
+    }
+  ];
 
   return (
     <>
@@ -220,7 +273,6 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
                 alt={post.imageAlt}
                 width={1600}
                 height={900}
-                unoptimized
                 className="h-[360px] w-full object-cover sm:h-[460px]"
                 priority
               />
@@ -266,15 +318,17 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-slate-500">Share:</span>
-                {["Facebook", "Twitter", "LinkedIn"].map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    aria-label={`Share on ${item}`}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#eef8f7] text-brand-teal transition-colors duration-300 hover:bg-brand-teal hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
+                {shareLinks.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Share this blog on ${item.label}`}
+                    className={`inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${item.className}`}
                   >
-                    <Share2 className="h-4 w-4" />
-                  </button>
+                    <item.icon />
+                  </a>
                 ))}
               </div>
             </div>
@@ -329,7 +383,6 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
                         alt={item.imageAlt}
                         fill
                         sizes="80px"
-                        unoptimized
                         className="object-cover"
                       />
                     </div>
@@ -348,13 +401,17 @@ export function NewsDetailContent({ post, allPosts }: NewsDetailContentProps) {
               <h3 className="text-3xl text-brand-ink">Categories</h3>
               <div className="mt-4 space-y-3">
                 {Object.entries(categoriesCount).map(([name, count]) => (
-                  <div key={name} className="flex items-center justify-between text-sm text-slate-700">
+                  <Link
+                    key={name}
+                    href={`/news?category=${encodeURIComponent(name)}`}
+                    className="flex items-center justify-between rounded-lg py-0.5 text-sm text-slate-700 transition-colors duration-300 hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
+                  >
                     <span className="inline-flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-brand-teal" />
                       {name}
                     </span>
                     <span>{String(count).padStart(2, "0")}</span>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

@@ -14,10 +14,10 @@ export const heroSlides = [
   {
     id: "kindergarten-program",
     tag: "Kindergarten Program",
-    heading: "Children’s Education & Activities.",
+    heading: "Safe Preschool, Day Care & Kids Activities.",
     description:
-      "A warm and trusted place where little learners grow through guided activities, gentle care, and joyful classrooms.",
-    primaryCta: { label: "Admission Open 22-23", href: "#programs" },
+      "A trusted early learning center where children grow through safe classrooms, expert teachers, guided play, and parent-friendly care.",
+    primaryCta: { label: "Explore Programs", href: "#programs" },
     image:
       "https://images.pexels.com/photos/8613100/pexels-photo-8613100.jpeg?auto=compress&cs=tinysrgb&w=2200",
     imageAlt: "Children learning together in a kindergarten classroom",
@@ -26,9 +26,9 @@ export const heroSlides = [
   {
     id: "creative-learning",
     tag: "Creative Learning",
-    heading: "Imaginations Flourish in Safe Indoor Oasis.",
+    heading: "Creative Learning in a Secure Indoor Space.",
     description:
-      "Colorful activities, music, movement, and collaborative play make every school day exciting and memorable.",
+      "Art, music, movement, and collaborative play help children build confidence, communication, and school readiness.",
     primaryCta: { label: "Explore Activities", href: "#events" },
     image:
       "https://images.pexels.com/photos/8471833/pexels-photo-8471833.jpeg?auto=compress&cs=tinysrgb&w=1400",
@@ -38,10 +38,10 @@ export const heroSlides = [
   {
     id: "kids-play-room",
     tag: "Kids Play Room",
-    heading: "Devoted to Nurturing Joy And Growth.",
+    heading: "Nurturing Joy, Safety, and Growth.",
     description:
-      "Safe indoor spaces, attentive teachers, and child-first routines create comfort, confidence, and meaningful progress.",
-    primaryCta: { label: "Join New Program", href: "#cta" },
+      "Attentive educators, child-first routines, and supervised play zones create comfort, confidence, and meaningful progress.",
+    primaryCta: { label: "Get Started", href: "#cta" },
     image:
       "https://images.pexels.com/photos/8471887/pexels-photo-8471887.jpeg?auto=compress&cs=tinysrgb&w=1400",
     imageAlt: "Children learning and smiling together",
@@ -82,20 +82,20 @@ export const aboutHighlights = [
 export const aboutShowcase = {
   heading: "Best for Your Kids",
   description:
-    "Being brave is not always a grand gesture. Sometimes it means trying one new thing each day in a place where children feel supported, safe, and encouraged.",
+    "KidNest gives children a safe, joyful start through preschool learning, day care support, activity classes, and caring routines built with parents in mind.",
   image:
     "https://images.pexels.com/photos/8471887/pexels-photo-8471887.jpeg?auto=compress&cs=tinysrgb&w=1400",
   imageAlt: "Happy children learning together with a tablet",
   stats: [
     { value: "14+", label: "Years of experience" },
     { value: "7K+", label: "Students each year" },
-    { value: "15+", label: "Award Wining" }
+    { value: "15+", label: "Awards won" }
   ],
   bullets: [
-    "We believe every child is intelligent so we care.",
-    "Teachers make a difference of your child."
+    "Child-safe routines, supervised classrooms, and clear parent updates.",
+    "Experienced teachers who support each child's pace and personality."
   ],
-  primaryCta: { label: "Apply Now", href: "#cta" },
+  primaryCta: { label: "Book a Visit", href: "#cta" },
   videoCta: { label: "Promotional Video", href: "#gallery" }
 };
 
@@ -136,7 +136,7 @@ export const programShowcaseCards = [
   {
     title: "Settling",
     description:
-      "To round out our weekend celebrations, we are holding our reunion.",
+      "Gentle transition sessions that help children feel secure and ready to learn.",
     image:
       "https://images.pexels.com/photos/8471973/pexels-photo-8471973.jpeg?auto=compress&cs=tinysrgb&w=1200",
     age: "6-7 Yrs",
@@ -169,7 +169,7 @@ export const programShowcaseCards = [
 ];
 
 export const faqSection = {
-  heading: "Know More About Kindedo",
+  heading: "Know More About KidNest",
   image:
     "https://images.pexels.com/photos/8613100/pexels-photo-8613100.jpeg?auto=compress&cs=tinysrgb&w=1400",
   imageAlt: "Happy children in a colorful kindergarten classroom",
@@ -230,7 +230,7 @@ export const upcomingEvents = eventCards.map(
 );
 
 export const testimonialPanel = {
-  heading: "Parents Says",
+  heading: "Parents Say",
   image:
     "https://images.pexels.com/photos/3933049/pexels-photo-3933049.jpeg?auto=compress&cs=tinysrgb&w=1800",
   imageAlt: "Teacher and child engaged in a joyful learning activity"

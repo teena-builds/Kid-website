@@ -24,7 +24,7 @@ export function PromoSection() {
           <h2 className="max-w-xl text-5xl leading-[1.08] text-[#171b21] sm:text-6xl">
             Know More
             <br />
-            About Kindedo
+            About KidNest
           </h2>
 
           <div className="mt-10 space-y-4">
