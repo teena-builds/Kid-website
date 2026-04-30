@@ -279,6 +279,7 @@ export const footerLinks = {
     { label: "Classes", href: "#classes" },
     { label: "Activities", href: "#programs" },
     { label: "News", href: "#events" },
+    { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "#footer" }
   ],
   programs: [
