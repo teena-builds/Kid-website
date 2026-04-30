@@ -23,7 +23,7 @@ function SectionTitle({
       <p className="text-sm uppercase tracking-[0.14em] text-brand-coral">
         {label}
       </p>
-      <h2 className="mt-3 text-5xl text-brand-ink">
+      <h2 className="mt-3 text-3xl lg:text-5xl text-brand-ink">
         {title}
       </h2>
       <p className="mt-3 text-lg leading-relaxed text-slate-600">{desc}</p>
@@ -51,7 +51,7 @@ function IntroSplit({
           <Image src={image} alt={imageAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover transition-transform duration-500 hover:scale-[1.03]" />
         </div>
         <div>
-          <h2 className="text-5xl text-brand-ink">
+          <h2 className="text-3xl lg:text-5xl text-brand-ink">
             {title}
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-slate-600">{description}</p>
@@ -195,9 +195,16 @@ function NurserySections() {
             </h3>
             <div className="mt-5 space-y-3">
               {timetable.map(([day, item]) => (
-                <div key={day} className="flex items-center justify-between rounded-2xl bg-[#f8fafc] px-4 py-3">
-                  <span className="text-brand-ink">{day}</span>
-                  <span className="text-slate-600">{item}</span>
+                <div
+                  key={day}
+                  className="flex flex-col gap-1.5 rounded-2xl bg-[#f8fafc] px-4 py-3 text-left sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                >
+                  <span className="shrink-0 text-sm text-brand-ink sm:text-base">
+                    {day}
+                  </span>
+                  <span className="text-sm leading-snug text-slate-600 sm:text-right sm:text-base">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -543,7 +550,7 @@ export function ShopPageContent({ pageKey }: ShopPageContentProps) {
         {...jsonLdProps(
           breadcrumbSchema([
             { name: "Home", path: "/" },
-            { name: "Shop", path: "/shop/play-group" },
+            { name: "Classes", path: "/shop/play-group" },
             { name: meta.banner.title, path: pagePath }
           ])
         )}

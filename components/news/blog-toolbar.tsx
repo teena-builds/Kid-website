@@ -1,6 +1,7 @@
 "use client";
 
-import { Search } from "lucide-react";
+import { useState } from "react";
+import { Check, ChevronDown, Search } from "lucide-react";
 import type { NewsCategory } from "@/data/news-data";
 
 type BlogToolbarProps = {
@@ -18,11 +19,18 @@ export function BlogToolbar({
   onCategoryChange,
   categories
 }: BlogToolbarProps) {
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
+  const handleMobileCategoryChange = (category: NewsCategory) => {
+    onCategoryChange(category);
+    setIsCategoryOpen(false);
+  };
+
   return (
     <section className="bg-[#fffaf1] pb-10 pt-14 lg:pt-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid gap-8 rounded-3xl bg-[#f4fbfa] p-6 shadow-card lg:grid-cols-[35%_60%] lg:items-end lg:gap-10 lg:p-8">
-          <div>
+        <div className="grid min-w-0 gap-8 overflow-hidden rounded-3xl bg-[#f4fbfa] p-6 shadow-card lg:grid-cols-[35%_60%] lg:items-end lg:gap-10 lg:p-8">
+          <div className="min-w-0">
             <h2 className="text-sm uppercase tracking-[0.14em] text-brand-ink">
               Search by Keyword
             </h2>
@@ -48,11 +56,55 @@ export function BlogToolbar({
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h2 className="text-sm uppercase tracking-[0.14em] text-brand-ink">
               By Category
             </h2>
-            <div className="mt-3 flex flex-wrap gap-2 rounded-2xl border border-[#e4ddd3] bg-white p-2">
+            <div className="mt-3 max-w-full min-w-0 sm:hidden">
+              <button
+                type="button"
+                aria-expanded={isCategoryOpen}
+                aria-controls="mobile-news-categories"
+                onClick={() => setIsCategoryOpen((current) => !current)}
+                className="flex h-12 w-full min-w-0 items-center justify-between gap-3 rounded-2xl border border-[#e4ddd3] bg-white px-4 text-left text-sm text-slate-700 shadow-sm outline-none transition focus-visible:ring-2 focus-visible:ring-brand-teal"
+              >
+                <span className="min-w-0 truncate">{activeCategory}</span>
+                <ChevronDown
+                  aria-hidden="true"
+                  className={`h-4 w-4 shrink-0 text-brand-teal transition-transform duration-200 ${
+                    isCategoryOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              </button>
+
+              {isCategoryOpen ? (
+                <div
+                  id="mobile-news-categories"
+                  className="mt-2 max-h-64 w-full overflow-y-auto rounded-2xl border border-[#e4ddd3] bg-white p-1.5 shadow-card"
+                >
+                  {categories.map((category) => {
+                    const isActive = category === activeCategory;
+                    return (
+                      <button
+                        key={category}
+                        type="button"
+                        onClick={() => handleMobileCategoryChange(category)}
+                        className={`flex w-full min-w-0 items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${
+                          isActive
+                            ? "bg-[#dcf6f4] text-brand-teal"
+                            : "text-slate-700 hover:bg-[#eef9f8] hover:text-brand-teal"
+                        }`}
+                      >
+                        <span className="min-w-0 truncate">{category}</span>
+                        {isActive ? <Check aria-hidden="true" className="h-4 w-4 shrink-0" /> : null}
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
+
+            <div className="mt-3 hidden flex-wrap gap-2 rounded-2xl border border-[#e4ddd3] bg-white p-2 sm:flex">
               {categories.map((category) => {
                 const isActive = category === activeCategory;
                 return (

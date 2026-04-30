@@ -37,7 +37,7 @@ function SectionHeading({
         {label}
       </p>
       <h2
-        className={`mt-3 text-5xl text-brand-ink sm:text-6xl ${titleClassName ?? ""}`}
+        className={`mt-3 lg:text-5xl text-3xl text-brand-ink sm:text-6xl ${titleClassName ?? ""}`}
       >
         {title}
       </h2>
@@ -72,7 +72,7 @@ function AboutIntroSplit() {
         </Reveal>
 
         <Reveal>
-          <h2 className="text-5xl leading-[1.08] text-brand-ink sm:text-6xl">
+          <h2 className="text-3xl lg:text-5xl leading-[1.08] text-brand-ink sm:text-6xl">
             {aboutIntro.heading}
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
@@ -175,7 +175,7 @@ function FriendlyAtmosphereSection() {
     <section className="bg-[#fffaf1] py-20 lg:py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[52%_48%] lg:items-center lg:gap-14 lg:px-8">
         <Reveal>
-          <h2 className="text-5xl leading-[1.08] text-brand-ink sm:text-6xl">
+          <h2 className="text-3xl lg:text-5xl leading-[1.08] text-brand-ink sm:text-6xl">
             {friendlyAtmosphere.heading}
           </h2>
           {friendlyAtmosphere.paragraphs.map((paragraph) => (

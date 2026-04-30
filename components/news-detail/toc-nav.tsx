@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Check, ChevronDown } from "lucide-react";
 
 type TocHeading = {
   id: string;
@@ -13,6 +14,7 @@ type TocNavProps = {
 
 export function TocNav({ headings }: TocNavProps) {
   const [activeId, setActiveId] = useState<string>(headings[0]?.id ?? "");
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const activeIdRef = useRef(activeId);
   const HEADER_OFFSET = 120;
 
@@ -94,10 +96,66 @@ export function TocNav({ headings }: TocNavProps) {
 
   if (headings.length === 0) return null;
 
+  const activeHeading = headings.find((item) => item.id === activeId) ?? headings[0];
+
+  const handleTocClick = (id: string) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+    const top = section.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+    window.scrollTo({ top, behavior: "smooth" });
+    setActiveId(id);
+    setIsMobileOpen(false);
+    window.history.replaceState(null, "", `#${id}`);
+  };
+
   return (
     <div className="rounded-2xl border border-[#ece3d6] bg-white p-5 shadow-card">
       <h3 className="text-2xl text-brand-ink">Table of Contents</h3>
-      <nav className="mt-4" aria-label="Table of contents">
+      <div className="mt-4 lg:hidden">
+        <button
+          type="button"
+          aria-expanded={isMobileOpen}
+          aria-controls="mobile-table-of-contents"
+          onClick={() => setIsMobileOpen((current) => !current)}
+          className="flex h-12 w-full min-w-0 items-center justify-between gap-3 rounded-2xl border border-[#e4ddd3] bg-white px-4 text-left text-sm text-slate-700 shadow-sm outline-none transition focus-visible:ring-2 focus-visible:ring-brand-teal"
+        >
+          <span className="min-w-0 truncate">{activeHeading.text}</span>
+          <ChevronDown
+            aria-hidden="true"
+            className={`h-4 w-4 shrink-0 text-brand-teal transition-transform duration-200 ${
+              isMobileOpen ? "rotate-180" : "rotate-0"
+            }`}
+          />
+        </button>
+
+        {isMobileOpen ? (
+          <div
+            id="mobile-table-of-contents"
+            className="mt-2 max-h-72 w-full overflow-y-auto rounded-2xl border border-[#e4ddd3] bg-white p-1.5 shadow-card"
+          >
+            {headings.map((item) => {
+              const isActive = item.id === activeId;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleTocClick(item.id)}
+                  className={`flex w-full min-w-0 items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${
+                    isActive
+                      ? "bg-[#dcf6f4] text-brand-teal"
+                      : "text-slate-700 hover:bg-[#eef9f8] hover:text-brand-teal"
+                  }`}
+                >
+                  <span className="min-w-0 truncate">{item.text}</span>
+                  {isActive ? <Check aria-hidden="true" className="h-4 w-4 shrink-0" /> : null}
+                </button>
+              );
+            })}
+          </div>
+        ) : null}
+      </div>
+
+      <nav className="mt-4 hidden lg:block" aria-label="Table of contents">
         <ul className="space-y-1.5">
           {headings.map((item) => {
             const isActive = item.id === activeId;
@@ -107,12 +165,7 @@ export function TocNav({ headings }: TocNavProps) {
                   href={`#${item.id}`}
                   onClick={(event) => {
                     event.preventDefault();
-                    const section = document.getElementById(item.id);
-                    if (!section) return;
-                    const top = section.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-                    window.scrollTo({ top, behavior: "smooth" });
-                    setActiveId(item.id);
-                    window.history.replaceState(null, "", `#${item.id}`);
+                    handleTocClick(item.id);
                   }}
                   className={`block line-clamp-2 rounded-lg border-l-2 px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${
                     isActive

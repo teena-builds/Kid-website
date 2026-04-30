@@ -21,7 +21,7 @@ export function PromoSection() {
       <span id="promo" className="block scroll-mt-32" aria-hidden="true" />
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-14 lg:px-8">
         <Reveal className="order-2 lg:order-1">
-          <h2 className="max-w-xl text-5xl leading-[1.08] text-[#171b21] sm:text-6xl">
+          <h2 className="max-w-xl text-4xl leading-[1.08] text-[#171b21] sm:text-6xl">
             Know More
             <br />
             About KidNest

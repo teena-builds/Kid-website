@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export type InnerPageBannerData = {
   title: string;
@@ -12,7 +13,36 @@ type InnerBannerProps = {
   banner: InnerPageBannerData;
 };
 
+const breadcrumbHrefByLabel: Record<string, string> = {
+  Home: "/",
+  About: "/about",
+  "Contact Us": "/contact",
+  FAQ: "/faq",
+  News: "/news",
+  "News Details": "/news",
+  Classes: "/shop/play-group",
+  "Play Group": "/shop/play-group",
+  "Nursery Program": "/shop/nursery-program",
+  "Junior KG": "/shop/junior-kg",
+  "Senior KG": "/shop/senior-kg",
+  "Activity Classes": "/shop/activity-classes",
+  "Day Care": "/shop/day-care"
+};
+
+function getBreadcrumbItems(value: string) {
+  return value
+    .split("/")
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((label) => ({
+      label,
+      href: breadcrumbHrefByLabel[label] ?? "/"
+    }));
+}
+
 export function InnerBanner({ banner }: InnerBannerProps) {
+  const breadcrumbItems = getBreadcrumbItems(banner.breadcrumb);
+
   return (
     <section className="relative overflow-hidden">
       <div className="relative min-h-[300px] sm:min-h-[340px]">
@@ -28,10 +58,25 @@ export function InnerBanner({ banner }: InnerBannerProps) {
         <div className="absolute inset-0 bg-gradient-to-r from-brand-teal/85 to-brand-sky/50" />
 
         <div className="relative z-10 mx-auto flex min-h-[300px] max-w-7xl flex-col items-center justify-center px-6 text-center sm:min-h-[340px] lg:px-8">
-          <p className="rounded-full border border-white/35 bg-white/10 px-4 py-1 text-sm text-white/95">
-            {banner.breadcrumb}
-          </p>
-          <h1 className="mt-5 text-5xl text-white sm:text-6xl">
+          <nav
+            aria-label="Breadcrumb"
+            className="rounded-full border border-white/35 bg-white/10 px-4 py-1 text-sm text-white/95"
+          >
+            <ol className="flex flex-wrap items-center justify-center gap-1.5">
+              {breadcrumbItems.map((item, index) => (
+                <li key={`${item.label}-${index}`} className="inline-flex items-center gap-1.5">
+                  {index > 0 ? <span aria-hidden="true">/</span> : null}
+                  <Link
+                    href={item.href}
+                    className="rounded-full px-1 transition-colors duration-300 hover:text-brand-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </nav>
+          <h1 className="mt-5 text-3xl lg:text-5xl text-white sm:text-6xl">
             {banner.title}
           </h1>
           {banner.subtitle ? (
