@@ -3,6 +3,7 @@ import Image from "next/image";
 export type InnerPageBannerData = {
   title: string;
   breadcrumb: string;
+  subtitle?: string;
   image: string;
   imageAlt: string;
 };
@@ -33,6 +34,11 @@ export function InnerBanner({ banner }: InnerBannerProps) {
           <h1 className="mt-5 text-5xl text-white sm:text-6xl">
             {banner.title}
           </h1>
+          {banner.subtitle ? (
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
+              {banner.subtitle}
+            </p>
+          ) : null}
         </div>
 
         <span className="absolute left-[11%] top-14 h-8 w-8 rounded-full border-2 border-white/60" />
