@@ -137,7 +137,7 @@ export async function Footer() {
             Join Our Newsletter
           </h2>
           <p className="relative z-10 mx-auto mt-3 max-w-2xl text-base text-white/85 sm:text-lg">
-            Subscribe our newsletter to get our latest update and news.
+            Get preschool tips, day care updates, activity ideas, and admission news from KidNest.
           </p>
 
           <NewsletterForm
@@ -170,13 +170,13 @@ export async function Footer() {
                 <span className="block text-4xl leading-none text-brand-ink">
                   KidNest
                 </span>
-                <span className="text-sm text-slate-600">Best School</span>
+                <span className="text-sm text-slate-600">Play Center</span>
               </span>
             </Link>
 
             <p className="mt-6 max-w-xs text-base leading-relaxed text-slate-600">
-              In our adult participation programs, for most students, it is
-              their first program in Kindedo.
+              Safe preschool, day care, activity classes, and joyful early learning
+              experiences for growing children.
             </p>
 
             <div className="mt-6 flex items-center gap-3">
@@ -262,7 +262,6 @@ export async function Footer() {
                       alt={post.imageAlt}
                       fill
                       sizes="64px"
-                      unoptimized
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                     />
                   </span>
@@ -282,7 +281,7 @@ export async function Footer() {
 
         <div className="mt-8 border-t border-slate-300/70 py-5">
           <div className="flex flex-col gap-2 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-            <p>(c) 2026 Kindedo. All rights reserved.</p>
+            <p>(c) 2026 KidNest. All rights reserved.</p>
             <Link href="#" className="transition-colors hover:text-brand-teal">
               Privacy Policy
             </Link>

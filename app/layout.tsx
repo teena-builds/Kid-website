@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { Fredoka } from "next/font/google";
 import "./globals.css";
 import type { ReactNode } from "react";
+import {
+  createPageMetadata,
+  jsonLdProps,
+  organizationSchema,
+  siteConfig,
+  websiteSchema
+} from "@/lib/seo";
 
 const fredoka = Fredoka({
   subsets: ["latin"],
@@ -10,9 +17,13 @@ const fredoka = Fredoka({
 });
 
 export const metadata: Metadata = {
-  title: "KidNest Play Center",
-  description:
-    "Premium kids play center, events, day care, and joyful learning experiences."
+  metadataBase: new URL(siteConfig.url),
+  ...createPageMetadata({
+    title: "KidNest Play Center | Preschool, Day Care & Kids Activities",
+    description:
+      "Safe preschool, day care, activity classes, and playful early learning programs for children with expert teachers and parent-friendly support.",
+    path: "/"
+  })
 };
 
 export default function RootLayout({
@@ -25,6 +36,8 @@ export default function RootLayout({
       <body
         className={`${fredoka.variable} bg-brand-cream text-brand-ink antialiased`}
       >
+        <script {...jsonLdProps(organizationSchema())} />
+        <script {...jsonLdProps(websiteSchema())} />
         {children}
       </body>
     </html>

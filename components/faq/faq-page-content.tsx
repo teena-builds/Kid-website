@@ -23,7 +23,7 @@ export function FaqPageContent() {
               Everything Parents Ask Before Joining
             </h2>
             <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
-              Clear, friendly answers about admissions, classrooms, safety, and daily life at Kindedo.
+              Clear, friendly answers about admissions, classrooms, safety, and daily life at KidNest.
             </p>
           </div>
 

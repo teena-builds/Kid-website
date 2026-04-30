@@ -2,6 +2,14 @@ import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "KidNest Play Center | Thank You",
+  description:
+    "Thank you for contacting KidNest Play Center. Our parent support team will respond soon about admissions, programs, or visits.",
+  path: "/thank-you"
+});
 
 export default function ThankYouPage() {
   return (

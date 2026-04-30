@@ -3,6 +3,7 @@ import { CheckCircle2, Clock3, Music2, Palette, ShieldCheck, Sparkles } from "lu
 import { InnerBanner } from "@/components/shop/inner-banner";
 import { ShopFaqAccordion } from "@/components/shop/shop-faq-accordion";
 import { shopPageMeta, type ShopPageKey } from "@/data/shop-pages-data";
+import { absoluteUrl, breadcrumbSchema, jsonLdProps, siteConfig } from "@/lib/seo";
 
 type ShopPageContentProps = {
   pageKey: ShopPageKey;
@@ -515,9 +516,38 @@ function DayCareSections() {
 
 export function ShopPageContent({ pageKey }: ShopPageContentProps) {
   const meta = shopPageMeta[pageKey];
+  const pagePath = `/shop/${pageKey}`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: meta.banner.title,
+    description: meta.intro,
+    provider: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url
+    },
+    areaServed: "Local families",
+    url: absoluteUrl(pagePath),
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      category: "Early childhood education"
+    }
+  };
 
   return (
     <>
+      <script {...jsonLdProps(serviceSchema)} />
+      <script
+        {...jsonLdProps(
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Shop", path: "/shop/play-group" },
+            { name: meta.banner.title, path: pagePath }
+          ])
+        )}
+      />
       <InnerBanner banner={meta.banner} />
 
       {pageKey === "play-group" && <PlayGroupSections />}

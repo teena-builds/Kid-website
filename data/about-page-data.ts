@@ -9,11 +9,11 @@ export const aboutBanner: InnerPageBannerData = {
 };
 
 export const aboutIntro = {
-  heading: "Best for Your Kids",
+  heading: "A Trusted Start for Your Kids",
   description:
-    "At KidNest, every child is welcomed with warmth, patience, and encouragement. We design each day to balance joyful play, early learning, and emotional confidence.",
+    "At KidNest, every child is welcomed with warmth, patience, and encouragement. We combine safe preschool routines, playful learning, and emotional confidence building.",
   supporting:
-    "Our teachers work closely with families so children feel secure, seen, and ready to grow at their own pace.",
+    "Our trained teachers work closely with families so children feel secure, seen, and ready to grow at their own pace.",
   image:
     "https://images.pexels.com/photos/3933049/pexels-photo-3933049.jpeg?auto=compress&cs=tinysrgb&w=1400",
   imageAlt: "Teacher sitting with happy children during class activity",
@@ -21,34 +21,34 @@ export const aboutIntro = {
     "Small groups with caring, trained educators",
     "A safe environment built for curiosity and confidence"
   ],
-  primaryCta: { label: "Schedule a Visit", href: "#footer" },
+  primaryCta: { label: "Book a Visit", href: "#footer" },
   secondaryLabel: "Admissions open for the new session"
 };
 
 export const whyBestFeatures = [
   {
     title: "Exclusive Care",
-    description: "Personal attention plans for every child."
+    description: "Personal attention plans for every child and family."
   },
   {
     title: "Highest Safety",
-    description: "Secured campus with supervised learning zones."
+    description: "Secured campus with supervised learning and play zones."
   },
   {
     title: "Hassle Free",
-    description: "Simple enrollment and parent-first communication."
+    description: "Simple enrollment, clear updates, and parent-first support."
   },
   {
     title: "Smooth Support",
-    description: "Helpful team for schedules, updates, and guidance."
+    description: "Helpful team for admissions, schedules, updates, and guidance."
   }
 ];
 
 export const friendlyAtmosphere = {
   heading: "Friendly atmosphere for all kids",
   paragraphs: [
-    "Children learn best when they feel comfortable, included, and inspired. Our classrooms are bright, calm, and thoughtfully planned to support both active play and focused learning.",
-    "From welcome circles to creative projects, we help children build friendships, language confidence, and independent habits in a joyful way."
+    "Children learn best when they feel comfortable, included, and inspired. Our classrooms are bright, calm, and thoughtfully planned for active play, focused learning, and safe routines.",
+    "From welcome circles to creative projects, we help children build friendships, language confidence, independent habits, and school readiness in a joyful way."
   ],
   pills: ["Full Day Sessions", "Varied Classes"],
   image:

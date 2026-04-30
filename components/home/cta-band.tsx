@@ -22,14 +22,14 @@ export function CtaBand() {
               Join Our New Session
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
-              Kindedo believes that good questions drive great answers. Whether
-              it&apos;s a query about the world around us or a challenge.
+              Book a visit, explore our programs, and meet the teachers who keep
+              learning safe, playful, and parent-friendly.
             </p>
             <Link
               href="#newsletter"
               className="mt-8 inline-flex rounded-full bg-[var(--btn-color)] px-9 py-3.5 text-base text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] hover:bg-[var(--btn-color-hover)] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-teal"
             >
-              Apply Now
+              Book a Visit
             </Link>
           </div>
         </Reveal>

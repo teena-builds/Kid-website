@@ -13,13 +13,14 @@ let memoryPostsCache: NewsPost[] | null = null;
 
 type BlogFeedProps = {
   initialPosts: NewsPost[];
+  initialCategory?: NewsCategory;
 };
 
-export function BlogFeed({ initialPosts }: BlogFeedProps) {
+export function BlogFeed({ initialPosts, initialCategory = "All" }: BlogFeedProps) {
   const [posts, setPosts] = useState<NewsPost[]>(initialPosts);
   const [loading, setLoading] = useState(initialPosts.length === 0);
   const [keyword, setKeyword] = useState("");
-  const [activeCategory, setActiveCategory] = useState<NewsCategory>("All");
+  const [activeCategory, setActiveCategory] = useState<NewsCategory>(initialCategory || "All");
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -116,11 +117,13 @@ export function BlogFeed({ initialPosts }: BlogFeedProps) {
   }, [posts]);
 
   useEffect(() => {
+    if (loading) return;
+
     if (!dynamicCategories.includes(activeCategory)) {
       setActiveCategory("All");
       setPage(1);
     }
-  }, [activeCategory, dynamicCategories]);
+  }, [activeCategory, dynamicCategories, loading]);
 
   const hasActiveFilters = keyword.trim().length > 0 || activeCategory !== "All";
 
