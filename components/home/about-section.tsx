@@ -34,7 +34,7 @@ export function AboutSection() {
         </Reveal>
 
         <Reveal>
-          <h2 className="text-5xl leading-[1.08] text-[#1b1f25] sm:text-6xl">
+          <h2 className="text-3xl lg:text-5xl leading-[1.08] text-[#1b1f25] sm:text-6xl">
             {aboutShowcase.heading}
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">

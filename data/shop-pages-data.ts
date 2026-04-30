@@ -27,7 +27,7 @@ export const shopPageMeta: Record<ShopPageKey, ShopPageData> = {
     key: "play-group",
     banner: {
       title: "Play Group",
-      breadcrumb: "Home / Shop / Play Group",
+      breadcrumb: "Home / Classes / Play Group",
       image:
         "https://images.pexels.com/photos/8612998/pexels-photo-8612998.jpeg?auto=compress&cs=tinysrgb&w=1600",
       imageAlt: "Toddlers playing with colorful blocks"
@@ -43,7 +43,7 @@ export const shopPageMeta: Record<ShopPageKey, ShopPageData> = {
     key: "nursery-program",
     banner: {
       title: "Nursery Program",
-      breadcrumb: "Home / Shop / Nursery Program",
+      breadcrumb: "Home / Classes / Nursery Program",
       image:
         "https://images.pexels.com/photos/8471833/pexels-photo-8471833.jpeg?auto=compress&cs=tinysrgb&w=1600",
       imageAlt: "Children painting in nursery classroom"
@@ -59,7 +59,7 @@ export const shopPageMeta: Record<ShopPageKey, ShopPageData> = {
     key: "junior-kg",
     banner: {
       title: "Junior KG",
-      breadcrumb: "Home / Shop / Junior KG",
+      breadcrumb: "Home / Classes / Junior KG",
       image:
         "https://images.pexels.com/photos/8471774/pexels-photo-8471774.jpeg?auto=compress&cs=tinysrgb&w=1600",
       imageAlt: "Junior KG kids writing and learning"
@@ -75,7 +75,7 @@ export const shopPageMeta: Record<ShopPageKey, ShopPageData> = {
     key: "senior-kg",
     banner: {
       title: "Senior KG",
-      breadcrumb: "Home / Shop / Senior KG",
+      breadcrumb: "Home / Classes / Senior KG",
       image:
         "https://images.pexels.com/photos/8422106/pexels-photo-8422106.jpeg?auto=compress&cs=tinysrgb&w=1600",
       imageAlt: "Senior KG children learning in class"
@@ -91,7 +91,7 @@ export const shopPageMeta: Record<ShopPageKey, ShopPageData> = {
     key: "activity-classes",
     banner: {
       title: "Activity Classes",
-      breadcrumb: "Home / Shop / Activity Classes",
+      breadcrumb: "Home / Classes / Activity Classes",
       image:
         "https://images.pexels.com/photos/8471827/pexels-photo-8471827.jpeg?auto=compress&cs=tinysrgb&w=1600",
       imageAlt: "Kids involved in music and art activities"
@@ -107,7 +107,7 @@ export const shopPageMeta: Record<ShopPageKey, ShopPageData> = {
     key: "day-care",
     banner: {
       title: "Day Care",
-      breadcrumb: "Home / Shop / Day Care",
+      breadcrumb: "Home / Classes / Day Care",
       image:
         "https://images.pexels.com/photos/3933049/pexels-photo-3933049.jpeg?auto=compress&cs=tinysrgb&w=1600",
       imageAlt: "Caregiver supporting children in day care"

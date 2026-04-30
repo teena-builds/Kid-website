@@ -321,7 +321,7 @@ export function HeroSection() {
 
                       <motion.h1
                         variants={textItemVariants}
-                        className="mt-4 text-5xl leading-[0.98] tracking-tight text-[#17191d] sm:text-7xl lg:text-6xl"
+                        className="mt-4 text-4xl leading-[0.98] tracking-tight text-[#17191d] sm:text-7xl lg:text-6xl"
                       >
                         {slide.heading}
                       </motion.h1>
@@ -345,7 +345,7 @@ export function HeroSection() {
                   ) : (
                     <div aria-hidden="true" className="opacity-0">
                       <p className="text-lg text-brand-teal">{slide.tag}</p>
-                      <h2 className="mt-4 text-5xl leading-[0.98] tracking-tight text-[#17191d] sm:text-7xl lg:text-8xl">
+                      <h2 className="mt-4 text-4xl leading-[0.98] tracking-tight text-[#17191d] sm:text-7xl lg:text-8xl">
                         {slide.heading}
                       </h2>
                       <p className="mt-6 max-w-lg text-lg leading-relaxed text-slate-600">
