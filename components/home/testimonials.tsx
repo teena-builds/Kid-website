@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { Quote, Star } from "lucide-react";
 import { testimonialPanel, testimonials } from "@/data/home-data";
@@ -27,10 +27,15 @@ export function Testimonials() {
     [activeIndex]
   );
 
-  const goToSlide = (index: number) => setActiveIndex(index);
-  const goNext = () => setActiveIndex((current) => (current + 1) % totalSlides);
-  const goPrev = () =>
-    setActiveIndex((current) => (current - 1 + totalSlides) % totalSlides);
+  const goToSlide = useCallback((index: number) => setActiveIndex(index), []);
+  const goNext = useCallback(
+    () => setActiveIndex((current) => (current + 1) % totalSlides),
+    [totalSlides]
+  );
+  const goPrev = useCallback(
+    () => setActiveIndex((current) => (current - 1 + totalSlides) % totalSlides),
+    [totalSlides]
+  );
 
   return (
     <section

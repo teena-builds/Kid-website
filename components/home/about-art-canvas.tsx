@@ -22,10 +22,20 @@ export function AboutArtCanvas({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let frame = 0;
+    let lastWidth = 0;
+    let lastHeight = 0;
+    let lastDpr = 0;
+
     const draw = () => {
       const dpr = window.devicePixelRatio || 1;
       const width = parent.clientWidth;
       const height = parent.clientHeight;
+      if (width === lastWidth && height === lastHeight && dpr === lastDpr) return;
+
+      lastWidth = width;
+      lastHeight = height;
+      lastDpr = dpr;
       canvas.width = Math.max(1, Math.floor(width * dpr));
       canvas.height = Math.max(1, Math.floor(height * dpr));
       canvas.style.width = `${width}px`;
@@ -78,10 +88,18 @@ export function AboutArtCanvas({
       ctx.globalAlpha = 1;
     };
 
+    const scheduleDraw = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(draw);
+    };
+
     draw();
-    const resizeObserver = new ResizeObserver(draw);
+    const resizeObserver = new ResizeObserver(scheduleDraw);
     resizeObserver.observe(parent);
-    return () => resizeObserver.disconnect();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+    };
   }, [variant]);
 
   return <canvas ref={canvasRef} className={className} aria-hidden="true" />;

@@ -94,6 +94,7 @@ export function PromoSection() {
                 alt={faqSection.imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 44vw"
+                decoding="async"
                 className="object-cover"
               />
             </div>
