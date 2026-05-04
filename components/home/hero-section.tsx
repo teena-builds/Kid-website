@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -209,27 +209,30 @@ export function HeroSection() {
   const [direction, setDirection] = useState<SlideDirection>(1);
   const [paused, setPaused] = useState(false);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setDirection(1);
     setSlideIndex((prev) => (prev + 1) % heroSlides.length);
-  };
+  }, []);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setDirection(-1);
     setSlideIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  };
+  }, []);
 
-  const jumpToSlide = (nextIndex: number) => {
-    if (nextIndex === slideIndex) return;
-    setDirection(nextIndex > slideIndex ? 1 : -1);
-    setSlideIndex(nextIndex);
-  };
+  const jumpToSlide = useCallback(
+    (nextIndex: number) => {
+      if (nextIndex === slideIndex) return;
+      setDirection(nextIndex > slideIndex ? 1 : -1);
+      setSlideIndex(nextIndex);
+    },
+    [slideIndex]
+  );
 
   useEffect(() => {
     if (paused) return;
     const timer = window.setInterval(nextSlide, 9000);
     return () => window.clearInterval(timer);
-  }, [paused]);
+  }, [nextSlide, paused]);
 
   const transition = useMemo(
     () => ({

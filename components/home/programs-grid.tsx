@@ -33,7 +33,8 @@ export function ProgramsGrid() {
                     alt={card.title}
                     width={1000}
                     height={650}
-                    loading={idx === 0 ? "eager" : "lazy"}
+                    loading="lazy"
+                    decoding="async"
                     className="h-64 w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
                   />
                 </div>

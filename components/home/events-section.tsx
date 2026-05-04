@@ -87,7 +87,8 @@ export async function EventsSection() {
                     alt={item.title}
                     width={1000}
                     height={720}
-                    loading={idx === 0 ? "eager" : "lazy"}
+                    loading="lazy"
+                    decoding="async"
                     className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                   />
                 </div>
